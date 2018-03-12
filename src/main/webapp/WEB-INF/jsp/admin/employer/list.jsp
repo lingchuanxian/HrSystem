@@ -37,8 +37,8 @@
 							class="easyui-combobox" editable="false" id="search-type-combox"
 							style="width: 128px;" name="artType" />
 						</td>
-						<td class="td_mm" style="display: none;">政治面貌：<input
-							class="easyui-textbox" type="text" id="search-mm"
+						<td class="td_mm" style="display: none;">政治面貌：
+						<input	class="easyui-combobox" editable="false" id="search-mm"
 							style="width: 200px" /></td>
 						<td class="td_jg" style="display: none;">籍贯：<input
 							class="easyui-textbox" type="text" id="search-jg"

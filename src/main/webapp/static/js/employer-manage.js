@@ -3,7 +3,7 @@
  */
 
 $(function(){
-	loadType($('#search-type-combox'),1);
+	getType($("#search-mm"),"PoliticalOutlook");
 	var datagrid; //定义全局变量datagrid
 	var editRow = undefined; //定义全局变量：当前编辑的行
 	datagrid = $("#data-table").datagrid({
@@ -91,6 +91,11 @@ $(function(){
 				field:'emAddress',
 				title:"家庭地址",
 				width:200,
+				align:'center',
+			},{
+				field:'emStatus',
+				title:"状态",
+				width:100,
 				align:'center',
 			}
 			]],
@@ -303,4 +308,28 @@ $(function(){
 		});  
 	}
 	//###########################	加载类别结束	############################
+	
+	function getType(combobox,code){
+		combobox.combobox({  
+			method:"POST",
+			url:getRootPath() + 'admin/selectType/'+code,  
+			valueField:'dictId',  
+			textField:'dictName',
+			editable:false,
+			loadFilter: function(data){
+				if (data.code == 200){
+					return data.data;
+				}else{
+					HandleException(data);
+				}
+			},
+			onLoadSuccess: function () { 
+				var data = $(this).combobox("getData");
+				console.log("combobox:"+data);
+				if(data.length > 0){
+					$(this).combobox("select", data[0].dictId);
+				}
+			}
+		});  
+	}
 });
