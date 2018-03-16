@@ -2,6 +2,8 @@ package cn.fjlcx.application.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +16,10 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import com.alibaba.fastjson.JSONArray;
 
@@ -100,4 +105,11 @@ public class BaseController {
 		}
 		return "/404";
 	}
+	
+	 @InitBinder
+	    public void initBinder(WebDataBinder binder) {
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        dateFormat.setLenient(false);
+	        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+	    }
 }

@@ -8,6 +8,7 @@ $(function(){
 	getType($("#marriage-combox"),"Marriage");
 	getType($("#PoliticalOutlook-combox"),"PoliticalOutlook");
 	getType($("#DegreeOfEducation-combox"),"DegreeOfEducation");
+	getType($("#Position-combox"),"Duties");
 	function getType(combobox,code){
 		combobox.combobox({  
 			method:"POST",
@@ -32,5 +33,21 @@ $(function(){
 		});  
 	}
 
+	$("#employer-submit").click(function(){
+		$('#employer-form').form('submit', {
+			url:getRootPath() + 'admin/employer/insert',
+			onSubmit: function(){
+				return $(this).form('enableValidation').form('validate');
+			},
+			success:function(data){
+				console.log(data);
+				
+			},
+			error:function(e){
+				$.messager.alert("提示消息", e.message,"error");
+			}
+		});
+	});
+		
 
 });
