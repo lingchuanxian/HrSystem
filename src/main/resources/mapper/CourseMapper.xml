@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fjlcx.application.mapper.CourseMapper">
+	<resultMap id="BaseResultMap" type="cn.fjlcx.application.bean.Course">
+		<!-- WARNING - @mbg.generated -->
+		<id column="cou_id" jdbcType="INTEGER" property="couId" />
+		<result column="cou_name" jdbcType="VARCHAR" property="couName" />
+		<result column="cou_sponsor" jdbcType="VARCHAR" property="couSponsor" />
+		<result column="cou_learner" jdbcType="VARCHAR" property="couLearner" />
+		<result column="cou_teachingHours" jdbcType="INTEGER"
+			property="couTeachinghours" />
+		<result column="cou_fee" jdbcType="DOUBLE" property="couFee" />
+		<result column="cou_startTime" jdbcType="DATE" property="couStarttime" />
+		<result column="cou_endTime" jdbcType="DATE" property="couEndtime" />
+		<association property="mTrainMode" column="cou_trainingMethods"
+			javaType="cn.fjlcx.application.bean.Dictionary"
+			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+		</association>
+		<association property="mTeachMode" column="cou_teachingMethods"
+			javaType="cn.fjlcx.application.bean.Dictionary"
+			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+		</association>
+	</resultMap>
+	<select id="selectCourseByCondition" resultMap="BaseResultMap">
+		select * from oa_courses
+		<if test="stype == 0">
+			where cou_name LIKE CONCAT(CONCAT('%',#{skey}),'%')
+		</if>
+	</select>
+</mapper>

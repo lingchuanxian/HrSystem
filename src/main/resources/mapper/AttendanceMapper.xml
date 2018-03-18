@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fjlcx.application.mapper.AttendanceMapper">
+  <resultMap id="BaseResultMap" type="cn.fjlcx.application.bean.Attendance">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="at_id" jdbcType="INTEGER" property="atId" />
+    <result column="at_month" jdbcType="VARCHAR" property="atMonth" />
+    <result column="at_em_id" jdbcType="INTEGER" property="atEmId" />
+    <result column="at_em_name" jdbcType="VARCHAR" property="atEmName" />
+    <result column="at_workDays" jdbcType="DOUBLE" property="atWorkdays" />
+    <result column="at_overtime" jdbcType="DOUBLE" property="atOvertime" />
+    <result column="at_leaveDays" jdbcType="DOUBLE" property="atLeavedays" />
+    <result column="at_absentDays" jdbcType="DOUBLE" property="atAbsentdays" />
+    <result column="at_late" jdbcType="DOUBLE" property="atLate" />
+    <association property="mEmployer" column="at_em_id"
+			javaType="cn.fjlcx.application.bean.Employer"
+			select="cn.fjlcx.application.mapper.EmployerMapper.selectEmployerById">
+		</association>
+  </resultMap>
+  
+  
+  <select id="selectAttendanceByCondition" resultMap="BaseResultMap">
+		select * from oa_attendance
+		<if test="stype == 0">
+			where at_em_id = #{skey}
+		</if>
+	</select>
+  
+</mapper>

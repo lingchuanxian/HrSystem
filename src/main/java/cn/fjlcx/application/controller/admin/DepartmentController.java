@@ -54,6 +54,19 @@ public class DepartmentController extends BaseController{
 		List<Department> depList = departmentService.selectDepByOrgId(id);
 		return ResultGenerator.genSuccessResult(depList);
 	}
+	
+	/**
+	 * 查询置顶机构下的部门
+	 * @param id
+	 * @return
+	 */
+	@RequiresPermissions("system:department:select")
+	@PostMapping("selectDepByOrgGet")
+	@ResponseBody
+	public Result selectDepByOrgGet(@RequestParam int id) {
+		List<Department> depList = departmentService.selectDepByOrgId(id);
+		return ResultGenerator.genSuccessResult(depList);
+	}
 
 	/**
 	 * 获取待选择部门

@@ -39,7 +39,7 @@
 					<tr>
 						<td class="td_key">身份证号：</td>
 						<td class="td_val"><input class="easyui-textbox" type="text"
-							name="usName" data-options="required:true,validType:'idcard'"
+							data-options="required:true,validType:'idcard'"
 							missingMessage="请填写身份证号" name="emIdcard"/></td>
 						<td class="td_key">出生日期：</td>
 						<td class="td_val"><input class="easyui-datebox"
@@ -85,12 +85,11 @@
 					</tr>
 					<tr>
 						<td class="td_key">部门：</td>
-						<td class="td_val"><input class="easyui-textbox" type="text"
-							name="emDepartment" data-options="required:true"
-							missingMessage="请填写部门" /></td>
+						<td class="td_val"><input value="18123456789" class="easyui-combobox"
+							editable="false" id="Department-combox" name="emDepartment"></td>
 						<td class="td_key">职务：</td>
-						<td class="td_val"><input class="easyui-combobox"
-							editable="false" id="Position-combox" name="emCulture"></td>
+						<td class="td_val"><input value="18123456789" class="easyui-combobox"
+							editable="false" id="Position-combox" name="emPosition"></td>
 					</tr>
 					<tr>
 						<td class="td_key">基本工资：</td>
@@ -98,10 +97,10 @@
 							name="emBasewages" data-options="required:true"
 							missingMessage="请填写基本工资" /></td>
 
-						<td class="td_key">调入时间：</td>
-						<td class="td_val"><input class="easyui-datebox"
+						<td class="td_key">员工状态：</td>
+						<td class="td_val"><input class="easyui-combobox"
 							editable="false" style="width: 204px;"
-							data-options="sharedCalendar:'#cc'" name="emStartime"></td>
+							id="Status-combox"name="emStatus"></td>
 					</tr>
 					<tr>
 						<td class="td_key">家庭地址：</td>

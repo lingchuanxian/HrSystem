@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fjlcx.application.mapper.ContractMapper">
+  <resultMap id="BaseResultMap" type="cn.fjlcx.application.bean.Contract">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="con_id" jdbcType="INTEGER" property="conId" />
+    <result column="con_Type" jdbcType="VARCHAR" property="conType" />
+    <result column="con_startTime" jdbcType="DATE" property="conStarttime" />
+    <result column="con_endTime" jdbcType="DATE" property="conEndtime" />
+    <result column="con_period" jdbcType="INTEGER" property="conPeriod" />
+    <result column="con_wage" jdbcType="DOUBLE" property="conWage" />
+    <result column="con_remark" jdbcType="LONGVARCHAR" property="conRemark" />
+    <association property="mEmployer" column="con_em_id"
+			javaType="cn.fjlcx.application.bean.Employer"
+			select="cn.fjlcx.application.mapper.EmployerMapper.selectEmployerById">
+		</association>
+		<association property="mConType" column="con_Type"
+			javaType="cn.fjlcx.application.bean.Dictionary"
+			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+		</association>
+  </resultMap>
+  
+  <select id="selectContractByCondition" resultMap="BaseResultMap">
+		select * from oa_contract
+		<if test="stype == 0">
+			where con_em_id = #{skey}
+		</if>
+	</select>
+</mapper>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2018-03-11 22:14:03
+Date: 2018-03-18 21:41:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -540,6 +540,73 @@ INSERT INTO `oa_article` VALUES ('90', '20岁的我，一点都不想虚度时�
 INSERT INTO `oa_article` VALUES ('92', 'qwe', '4', '789213', '2018-02-01 16:58:29', '23', null, '0', '0', null);
 
 -- ----------------------------
+-- Table structure for oa_attendance
+-- ----------------------------
+DROP TABLE IF EXISTS `oa_attendance`;
+CREATE TABLE `oa_attendance` (
+  `at_id` int(11) NOT NULL AUTO_INCREMENT,
+  `at_month` varchar(20) DEFAULT NULL,
+  `at_em_id` int(20) DEFAULT NULL,
+  `at_em_name` varchar(10) DEFAULT NULL,
+  `at_workDays` double(10,0) DEFAULT NULL,
+  `at_overtime` double(10,0) DEFAULT NULL,
+  `at_leaveDays` double(10,0) DEFAULT NULL,
+  `at_absentDays` double(10,0) DEFAULT NULL,
+  `at_late` double(10,0) DEFAULT NULL,
+  PRIMARY KEY (`at_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of oa_attendance
+-- ----------------------------
+INSERT INTO `oa_attendance` VALUES ('2', '2018-04', '23', null, '18', '2', '2', '3', '1');
+
+-- ----------------------------
+-- Table structure for oa_contract
+-- ----------------------------
+DROP TABLE IF EXISTS `oa_contract`;
+CREATE TABLE `oa_contract` (
+  `con_id` int(11) NOT NULL AUTO_INCREMENT,
+  `con_em_id` int(20) DEFAULT NULL COMMENT '员工id',
+  `con_Type` int(10) DEFAULT NULL COMMENT '合同类型',
+  `con_startTime` datetime DEFAULT NULL COMMENT '合同开始时间',
+  `con_endTime` datetime DEFAULT NULL COMMENT '合同结束时间',
+  `con_period` int(2) DEFAULT NULL COMMENT '合同期限',
+  `con_wage` double(10,0) DEFAULT NULL COMMENT '合同工资',
+  `con_remark` text COMMENT '备注',
+  PRIMARY KEY (`con_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of oa_contract
+-- ----------------------------
+INSERT INTO `oa_contract` VALUES ('1', '24', '34', '2018-03-18 00:00:00', '2018-03-20 00:00:00', '2', '3000', '3000');
+INSERT INTO `oa_contract` VALUES ('4', '23', '34', '2018-03-19 00:00:00', '2018-03-21 00:00:00', '30000', '30000', '30000');
+
+-- ----------------------------
+-- Table structure for oa_courses
+-- ----------------------------
+DROP TABLE IF EXISTS `oa_courses`;
+CREATE TABLE `oa_courses` (
+  `cou_id` int(20) NOT NULL AUTO_INCREMENT,
+  `cou_name` varchar(10) DEFAULT NULL,
+  `cou_sponsor` varchar(10) DEFAULT NULL,
+  `cou_trainingMethods` int(10) DEFAULT NULL,
+  `cou_learner` varchar(10) DEFAULT NULL,
+  `cou_teachingMethods` int(10) DEFAULT NULL,
+  `cou_teachingHours` double(10,0) DEFAULT NULL,
+  `cou_fee` double(10,0) DEFAULT NULL,
+  `cou_startTime` date DEFAULT NULL,
+  `cou_endTime` date DEFAULT NULL,
+  PRIMARY KEY (`cou_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of oa_courses
+-- ----------------------------
+INSERT INTO `oa_courses` VALUES ('4', '2', '2', '53', '2', '55', '2', '2', '2018-03-18', '2018-03-21');
+
+-- ----------------------------
 -- Table structure for oa_department
 -- ----------------------------
 DROP TABLE IF EXISTS `oa_department`;
@@ -577,7 +644,7 @@ CREATE TABLE `oa_dictionary` (
   `dict_description` text,
   `dict_order` int(11) NOT NULL,
   PRIMARY KEY (`dict_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='字典表';
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COMMENT='字典表';
 
 -- ----------------------------
 -- Records of oa_dictionary
@@ -623,6 +690,17 @@ INSERT INTO `oa_dictionary` VALUES ('42', '5', 'Greater than', '大过', '大过
 INSERT INTO `oa_dictionary` VALUES ('43', '5', 'Downgrade', '降级', '降级', '40');
 INSERT INTO `oa_dictionary` VALUES ('44', '5', 'Expel', '开除', '开除', '41');
 INSERT INTO `oa_dictionary` VALUES ('45', '7', 'Customer Manager', '客户经理', '客户经理', '42');
+INSERT INTO `oa_dictionary` VALUES ('46', '14', 'married', '已婚', '已婚', '43');
+INSERT INTO `oa_dictionary` VALUES ('47', '14', 'unmarried', '未婚', '未婚', '44');
+INSERT INTO `oa_dictionary` VALUES ('48', '3', 'Divorce', '离异', '离异', '45');
+INSERT INTO `oa_dictionary` VALUES ('49', '15', 'Internship', '实习', '实习', '46');
+INSERT INTO `oa_dictionary` VALUES ('50', '15', 'On trial', '试用', '试用', '47');
+INSERT INTO `oa_dictionary` VALUES ('51', '15', 'Job', '在职', '在职', '48');
+INSERT INTO `oa_dictionary` VALUES ('52', '15', 'Quit', '离职', '离职', '49');
+INSERT INTO `oa_dictionary` VALUES ('53', '16', 'InnerTraining', '内训', '内训', '50');
+INSERT INTO `oa_dictionary` VALUES ('54', '16', 'External training', '外训', '外训', '51');
+INSERT INTO `oa_dictionary` VALUES ('55', '17', 'FaceTeache', '面授', '面授', '52');
+INSERT INTO `oa_dictionary` VALUES ('56', '17', 'RemoteTeaching', '远程教授', '远程教授', '53');
 
 -- ----------------------------
 -- Table structure for oa_dictionary_type
@@ -635,7 +713,7 @@ CREATE TABLE `oa_dictionary_type` (
   `dt_description` text,
   PRIMARY KEY (`dt_id`),
   UNIQUE KEY `dt_code` (`dt_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='字典类别表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='字典类别表';
 
 -- ----------------------------
 -- Records of oa_dictionary_type
@@ -651,6 +729,10 @@ INSERT INTO `oa_dictionary_type` VALUES ('10', 'Family', '名族', '名族');
 INSERT INTO `oa_dictionary_type` VALUES ('11', 'AssessmentProject', '考核项目', '考核项目');
 INSERT INTO `oa_dictionary_type` VALUES ('12', 'TypeOfContract', '合同类型', '合同类型');
 INSERT INTO `oa_dictionary_type` VALUES ('13', 'TypeOfEmployment', '聘用类型', '聘用类型');
+INSERT INTO `oa_dictionary_type` VALUES ('14', 'Marriage', '婚姻状况', '婚姻状况');
+INSERT INTO `oa_dictionary_type` VALUES ('15', 'EmployeeStatus', '员工任职状态', '员工任职状态');
+INSERT INTO `oa_dictionary_type` VALUES ('16', 'TrainingMode', '培训方式', '培训方式');
+INSERT INTO `oa_dictionary_type` VALUES ('17', 'TeachingMode', '授课方式', '授课方式');
 
 -- ----------------------------
 -- Table structure for oa_employer
@@ -660,22 +742,22 @@ CREATE TABLE `oa_employer` (
   `em_id` int(20) NOT NULL AUTO_INCREMENT,
   `em_name` varchar(10) DEFAULT NULL,
   `em_gender` int(2) DEFAULT NULL,
-  `em_IDCard` varchar(20) NOT NULL,
-  `em_born` varchar(20) DEFAULT NULL,
-  `em_nation` varchar(10) DEFAULT NULL,
+  `em_IDCard` varchar(50) NOT NULL,
+  `em_born` datetime DEFAULT NULL,
+  `em_nation` int(10) DEFAULT NULL,
   `em_marriage` int(2) DEFAULT NULL,
-  `em_visage` varchar(10) DEFAULT NULL,
+  `em_visage` int(10) DEFAULT NULL,
   `em_ancestralHome` varchar(20) DEFAULT NULL,
   `em_tel` varchar(20) DEFAULT NULL,
   `em_address` varchar(20) DEFAULT NULL,
   `em_email` varchar(20) DEFAULT NULL,
-  `em_culture` varchar(10) DEFAULT NULL,
+  `em_culture` int(10) DEFAULT NULL,
   `em_graduationSchool` varchar(20) DEFAULT NULL,
   `em_speciality` varchar(20) DEFAULT NULL,
-  `em_starTime` varchar(20) DEFAULT NULL,
+  `em_starTime` datetime DEFAULT NULL,
   `em_workAge` int(2) DEFAULT NULL,
   `em_photo` text,
-  `em_department` varchar(20) DEFAULT NULL,
+  `em_department` int(20) DEFAULT NULL,
   `em_position` varchar(10) DEFAULT NULL,
   `em_title` varchar(10) DEFAULT NULL,
   `em_baseWages` double(10,0) DEFAULT NULL,
@@ -684,24 +766,12 @@ CREATE TABLE `oa_employer` (
   `em_createTime` varchar(20) DEFAULT NULL,
   `em_createName` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`em_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='员工表';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='员工表';
 
 -- ----------------------------
 -- Records of oa_employer
 -- ----------------------------
-INSERT INTO `oa_employer` VALUES ('1', '李小龙', '1', '350333197012218181', '1970-01-11', '汉', '1', '中共党员', '福建', '18755661122', '福建省三明市三元区', '133456654@qq.com', '本科', '三明学院', '财务管理', '2015-12-12', '2', null, '财务管理部门', '部门主管', '初级', '3000', '2000', '在职', '2015-12-12 00:00:00', '黄婷');
-INSERT INTO `oa_employer` VALUES ('2', '李婷婷', '2', '650322199303016102', '1993-03-16', '汉', '0', '共青团员', '福建', '15012365445', '福建省三明市荆东村', '1550001657@qq.com', '本科', '农林大学', '计算机', '2017-01-05', '1', null, '财务管理部门', '文员', '初级', '2000', '800', '在职', '2017-01-06 16:02:10', '孙俪');
-INSERT INTO `oa_employer` VALUES ('3', '陆飞', '1', '321550198005039161', '1980-05-03', '汉', '1', '中共党员', '湖南', '13656658998', '湖南省岳阳市大街', '50641000@qq.com', '本科', '湖南工业大学', '人事管理', '2012-08-21', '5', null, '人事管理部门', '文员', '中级', '2000', '1000', '在职', '2015-11-22 15:27:27', '黄婷');
-INSERT INTO `oa_employer` VALUES ('4', '杨采羽', '2', '32211019901003', '1990-10-03', '汉', '0', '中共党员', '福建', '13000220166', '福建省莆田市荔城区', '664000445@qq.com', '本科', '福建师范大学', '人事管理', '2014-06-12', '3', null, '人事管理部门', '助理', '初级', '2000', '1000', '在职', '2014-06-12 16:31:59', '黄婷');
-INSERT INTO `oa_employer` VALUES ('5', '韩寒', '1', '350655198506068111', '1985-06-06', '汉', '1', '群众', '福建', '15623321002', '福建省福州市福清', '960220302@qq.com', '本科', '厦门理工学院', '计算机', '2005-06-02', '11', null, '人事管理部门', '文员', '高级', '4000', '1500', '在职', '2005-06-10 16:55:34', '黄婷');
-INSERT INTO `oa_employer` VALUES ('6', '林清音', '2', '322020199011066102', '1990-11-02', '汉', '0', '中共党员', '浙江', '15623320001', '浙江省江山市临桂区', '65552200@qq.com', '本科', '福州大学', '法律事务部', '2014-06-12', '3', null, '法律事务部', '助理', '中级', '3000', '1000', '在职', '2014-06-12 17:39:49', '黄婷');
-INSERT INTO `oa_employer` VALUES ('7', '孟非', '1', '352350196810108941', '1968-10-10', '汉', '1', '群众', '北京', '15985462156', '北京市朝阳区35路', '100868844@qq.com', '专科', '北京汉语学院', '汉语言文学', '2010-05-21', '7', null, '服务管理部门', '客户经理', '中级', '5000', '3000', '在职', '2010-05-22 00:00:00', '孙俪');
-INSERT INTO `oa_employer` VALUES ('8', '金霖', '2', '560223199003054402', '1990-03-05', '汉', '0', '群众', '福建', '130558460002', '福建省厦门市翔安区', '6003200077@qq.com', '硕士', '武汉大学', '金融', '2014-06-01', '2', null, '人事管理部门', '文员', '中级', '4000', '1500', '在职', '2014-06-02 17:09:44', '黄婷');
-INSERT INTO `oa_employer` VALUES ('9', '吴玉芬', '2', '420123198407219652', '1984-07-21', '汉', '1', '群众', '广东', '1506652330', '广东省广州市汕头', '550123000@qq.com', '本科', '天津技术学院', '汉语言文学', '2008-02-22', '9', null, '人事管理部门', '文员', '高级', '5000', '2000', '在职', '2008-02-22 00:00:00', '孙俪');
-INSERT INTO `oa_employer` VALUES ('10', '莫晓娜', '2', '356351199206086132', '1992-06-08', '汉', '0', '共青团员', '福建', '16855201003', '福建省龙岩市某区某镇', '2756120330@qq.com', '本科', '上海技术学院', '管理学', '2015-06-20', '2', null, '行政管理部门', '秘书', '初级', '2000', '1000', '在职', '2015-06-20 00:00:00', '黄婷');
-INSERT INTO `oa_employer` VALUES ('11', '吴兴', '1', '350666197502088711', '1975-02-08', '汉', '1', '群众', '福建', '18759885522', '福建省三明市大田县', '99441023@qq.com', '专科', '厦门翔安技术学院', '会计', '2002-10-20', '14', null, '行政管理部门', '主管', '高级', '5000', '2000', '在职', '2002-10-21 17:42:54', '孙俪');
-INSERT INTO `oa_employer` VALUES ('12', '徐琳琳', '2', '650321198106309132', '1981-10-30', '汉', '1', '群众', '福建', '16952663200', '福建省南平市建瓯', '651288800@qq.com', '本科', '福建农林大学', '金融学', '2005-06-22', '11', null, '行政管理部门', '主管', '高级', '7000', '3000', '在职', '2005-06-22 00:00:00', '孙俪');
-INSERT INTO `oa_employer` VALUES ('13', '古天乐', '2', '620130198010205581', '1980-10-20', '汉', '1', '中共党员', '福建', '15612332030', '福建省厦门市湖里区', '85200110@qq.com', '硕士', '厦门大学', '金融学', '2002-06-10', '14', null, '行政管理部门', '经理', '高级', '8000', '3500', '在职', '2002-06-10 00:00:00', '黄婷');
+INSERT INTO `oa_employer` VALUES ('26', 'lcx001', '2', '350526199409197518', '2018-02-27 00:00:00', '26', '46', '22', 'jiguan', '18123456789', '18123456789', '1@qq.com', '14', '18123456789', '18123456789', '2018-03-29 00:00:00', null, null, '29', '10', null, '3000', null, '49', null, null);
 
 -- ----------------------------
 -- Table structure for oa_enclosure
@@ -738,7 +808,7 @@ CREATE TABLE `oa_menu` (
   `mu_order` int(11) DEFAULT NULL,
   `mu_isdel` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`mu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of oa_menu
@@ -820,26 +890,46 @@ INSERT INTO `oa_menu` VALUES ('148', '新增', '1', 'system:dictionary:insert', 
 INSERT INTO `oa_menu` VALUES ('149', '编辑', '1', 'system:dictionary:update', 'open', 'icon-node', '3', '0', '00000000142', null, '88', '0');
 INSERT INTO `oa_menu` VALUES ('150', '删除', '1', 'system:dictionary:delete', 'open', 'icon-node', '4', '0', '00000000142', null, '89', '0');
 INSERT INTO `oa_menu` VALUES ('151', '工资管理', '0', 'system:wages:read', 'open', 'icon-money-yen', '', '0', '00000000000', null, '7', '0');
-INSERT INTO `oa_menu` VALUES ('152', '资源管理', '0', 'system:resource:read', 'open', 'icon-node', '', '0', '00000000000', null, '8', '0');
+INSERT INTO `oa_menu` VALUES ('152', '资源管理', '0', 'system:resource:read', 'open', 'icon-package', '', '0', '00000000000', null, '8', '0');
 INSERT INTO `oa_menu` VALUES ('153', '人事管理', '0', 'system:person:read', 'open', 'icon-book-red', '', '0', '00000000000', null, '90', '0');
 INSERT INTO `oa_menu` VALUES ('154', '报表打印', '0', 'system:report:read', 'open', 'icon-table', '', '0', '00000000000', null, '91', '0');
-INSERT INTO `oa_menu` VALUES ('155', '工资信息管理', '0', 'system:wages:info:read', 'open', 'icon-money', '', '0', '00000000151', null, '94', '0');
-INSERT INTO `oa_menu` VALUES ('156', '员工奖惩管理', '0', 'system:wages:rp:read', 'open', 'icon-medal-bronze-2', '', '0', '00000000151', null, '95', '0');
-INSERT INTO `oa_menu` VALUES ('157', '考核信息管理', '0', 'system:wages:assessment:read', 'open', 'icon-layout', '', '0', '00000000151', null, '96', '0');
-INSERT INTO `oa_menu` VALUES ('158', '工资设置', '0', 'system:wages:setting:read', 'open', 'icon-money-dollar', '', '0', '00000000151', null, '97', '0');
-INSERT INTO `oa_menu` VALUES ('159', '培训课程管理', '0', 'system:course:read', 'open', 'icon-node', '', '0', '00000000152', null, '98', '0');
+INSERT INTO `oa_menu` VALUES ('155', '工资信息管理', '0', 'system:wages:list', 'open', 'icon-money', 'admin/wages/list', '0', '00000000151', null, '94', '0');
+INSERT INTO `oa_menu` VALUES ('156', '员工奖惩管理', '0', 'system:rewardPunishment:list', 'open', 'icon-medal-bronze-2', 'admin/rewardPunishment/list', '0', '00000000151', null, '95', '0');
+INSERT INTO `oa_menu` VALUES ('157', '考勤信息管理', '0', 'system:attendance:list', 'open', 'icon-layout', 'admin/attendance/list', '0', '00000000151', null, '96', '0');
+INSERT INTO `oa_menu` VALUES ('158', '工资设置', '0', 'system:wages:setting:read', 'open', 'icon-money-dollar', '', '0', '00000000151', null, '97', '1');
+INSERT INTO `oa_menu` VALUES ('159', '培训课程管理', '0', 'system:course:list', 'open', 'icon-script', 'admin/course/list', '0', '00000000152', null, '98', '0');
 INSERT INTO `oa_menu` VALUES ('160', '人事信息管理', '0', 'system:employer:list', 'open', 'icon-group-link', 'admin/employer/list', '0', '00000000153', null, '99', '0');
 INSERT INTO `oa_menu` VALUES ('161', '新员工登记', '0', 'system:employer:insert', 'open', 'icon-group-add', 'admin/employer/toinsert', '0', '00000000153', null, '100', '0');
 INSERT INTO `oa_menu` VALUES ('162', '员工调动', '0', 'ygdd', 'open', 'icon-group-go', '', '0', '00000000153', null, '101', '0');
 INSERT INTO `oa_menu` VALUES ('163', '员工离职', '0', 'yglz', 'open', 'icon-group-delete', '', '0', '00000000153', null, '102', '0');
 INSERT INTO `oa_menu` VALUES ('164', '培训管理', '0', 'pxgl', 'open', 'icon-node', '', '0', '00000000153', null, '103', '0');
-INSERT INTO `oa_menu` VALUES ('165', '合同管理', '0', 'htgl', 'open', 'icon-node', '', '0', '00000000153', null, '104', '0');
+INSERT INTO `oa_menu` VALUES ('165', '合同管理', '0', 'system:contract:list', 'open', 'icon-folder-page', 'admin/contract/list', '0', '00000000153', null, '104', '0');
 INSERT INTO `oa_menu` VALUES ('166', '工资信息', '0', 'gzxx', 'open', 'icon-node', '', '0', '00000000154', null, '105', '0');
 INSERT INTO `oa_menu` VALUES ('167', '员工信息', '0', 'yggl', 'open', 'icon-node', '', '0', '00000000154', null, '106', '0');
 INSERT INTO `oa_menu` VALUES ('168', '查询', '1', 'system:employer:select', 'open', 'icon-node', '', '0', '00000000160', null, '107', '0');
 INSERT INTO `oa_menu` VALUES ('169', '新增', '1', 'system:employer:insert', 'open', 'icon-node', '', '0', '00000000160', null, '108', '1');
 INSERT INTO `oa_menu` VALUES ('170', '编辑', '1', 'system:employer:update', 'open', 'icon-node', '', '0', '00000000160', null, '109', '0');
 INSERT INTO `oa_menu` VALUES ('171', '删除', '1', 'system:employer:delete', 'open', 'icon-node', '', '0', '00000000160', null, '110', '0');
+INSERT INTO `oa_menu` VALUES ('172', '查询', '1', 'system:contract:select', 'open', 'icon-node', '', '0', '00000000165', null, '111', '0');
+INSERT INTO `oa_menu` VALUES ('173', '新增', '1', 'system:contract:insert', 'open', 'icon-node', '', '0', '00000000165', null, '112', '0');
+INSERT INTO `oa_menu` VALUES ('174', '编辑', '1', 'system:contract:update', 'open', 'icon-node', '', '0', '00000000165', null, '113', '0');
+INSERT INTO `oa_menu` VALUES ('175', '删除', '1', 'system:contract:delete', 'open', 'icon-node', '', '0', '00000000165', null, '114', '0');
+INSERT INTO `oa_menu` VALUES ('176', '查询', '1', 'system:wages:select', 'open', 'icon-node', '', '0', '00000000155', null, '115', '0');
+INSERT INTO `oa_menu` VALUES ('177', '查询', '1', 'system:rewardPunishment:select', 'open', 'icon-node', '', '0', '00000000156', null, '116', '0');
+INSERT INTO `oa_menu` VALUES ('178', '查询', '1', 'system:course:select', 'open', 'icon-node', '', '0', '00000000159', null, '117', '0');
+INSERT INTO `oa_menu` VALUES ('179', '新增', '1', 'system:course:insert', 'open', 'icon-node', '', '0', '00000000159', null, '118', '0');
+INSERT INTO `oa_menu` VALUES ('180', '编辑', '1', 'system:course:update', 'open', 'icon-node', '', '0', '00000000159', null, '119', '0');
+INSERT INTO `oa_menu` VALUES ('181', '删除', '1', 'system:course:delete', 'open', 'icon-node', '', '0', '00000000159', null, '120', '0');
+INSERT INTO `oa_menu` VALUES ('182', '查询', '1', 'system:attendance:select', 'open', 'icon-node', '', '0', '00000000157', null, '121', '0');
+INSERT INTO `oa_menu` VALUES ('183', '新增', '1', 'system:rewardPunishment:insert', 'open', 'icon-node', '', '0', '00000000156', null, '122', '0');
+INSERT INTO `oa_menu` VALUES ('184', '编辑', '1', 'system:rewardPunishment:update', 'open', 'icon-node', '', '0', '00000000156', null, '123', '0');
+INSERT INTO `oa_menu` VALUES ('185', '删除', '1', 'system:rewardPunishment:delete', 'open', 'icon-node', '', '0', '00000000156', null, '124', '0');
+INSERT INTO `oa_menu` VALUES ('186', '新增', '1', 'system:attendance:insert', 'open', 'icon-node', '', '0', '00000000157', null, '125', '0');
+INSERT INTO `oa_menu` VALUES ('187', '编辑', '1', 'system:attendance:update', 'open', 'icon-node', '', '0', '00000000157', null, '126', '0');
+INSERT INTO `oa_menu` VALUES ('188', '删除', '1', 'system:attendance:delete', 'open', 'icon-node', '', '0', '00000000157', null, '127', '0');
+INSERT INTO `oa_menu` VALUES ('189', '新增', '1', 'system:wages:insert', 'open', 'icon-node', '', '0', '00000000155', null, '128', '0');
+INSERT INTO `oa_menu` VALUES ('190', '编辑', '1', 'system:wages:update', 'open', 'icon-node', '', '0', '00000000155', null, '129', '0');
+INSERT INTO `oa_menu` VALUES ('191', '删除', '1', 'system:wages:delete', 'open', 'icon-node', '', '0', '00000000155', null, '130', '0');
 
 -- ----------------------------
 -- Table structure for oa_notepad
@@ -880,6 +970,26 @@ CREATE TABLE `oa_organization` (
 INSERT INTO `oa_organization` VALUES ('1', '三明学院银行', 'smxyyh', '三明学院银行', '0', '0', '0');
 
 -- ----------------------------
+-- Table structure for oa_reward_punishment
+-- ----------------------------
+DROP TABLE IF EXISTS `oa_reward_punishment`;
+CREATE TABLE `oa_reward_punishment` (
+  `ap_id` int(20) NOT NULL AUTO_INCREMENT,
+  `ap_month` varchar(20) NOT NULL,
+  `ap_em_id` int(20) DEFAULT NULL,
+  `ap_project` int(10) DEFAULT NULL,
+  `al_allowance` double(10,0) DEFAULT NULL,
+  `al_date` date DEFAULT NULL,
+  `ap_description` text,
+  PRIMARY KEY (`ap_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of oa_reward_punishment
+-- ----------------------------
+INSERT INTO `oa_reward_punishment` VALUES ('5', '2018-02', '26', '36', '10000', '2018-03-18', '10000');
+
+-- ----------------------------
 -- Table structure for oa_role
 -- ----------------------------
 DROP TABLE IF EXISTS `oa_role`;
@@ -913,7 +1023,7 @@ CREATE TABLE `oa_role_menu` (
   `rm_mid` int(11) NOT NULL,
   `rm_isdel` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`rm_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=415 DEFAULT CHARSET=utf8 COMMENT='角色-菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=435 DEFAULT CHARSET=utf8 COMMENT='角色-菜单表';
 
 -- ----------------------------
 -- Records of oa_role_menu
@@ -1079,7 +1189,7 @@ INSERT INTO `oa_role_menu` VALUES ('397', '1', '154', '0');
 INSERT INTO `oa_role_menu` VALUES ('398', '1', '155', '0');
 INSERT INTO `oa_role_menu` VALUES ('399', '1', '156', '0');
 INSERT INTO `oa_role_menu` VALUES ('400', '1', '157', '0');
-INSERT INTO `oa_role_menu` VALUES ('401', '1', '158', '0');
+INSERT INTO `oa_role_menu` VALUES ('401', '1', '158', '1');
 INSERT INTO `oa_role_menu` VALUES ('402', '1', '159', '0');
 INSERT INTO `oa_role_menu` VALUES ('403', '1', '160', '0');
 INSERT INTO `oa_role_menu` VALUES ('404', '1', '161', '0');
@@ -1093,6 +1203,26 @@ INSERT INTO `oa_role_menu` VALUES ('411', '1', '168', '0');
 INSERT INTO `oa_role_menu` VALUES ('412', '1', '169', '1');
 INSERT INTO `oa_role_menu` VALUES ('413', '1', '170', '0');
 INSERT INTO `oa_role_menu` VALUES ('414', '1', '171', '0');
+INSERT INTO `oa_role_menu` VALUES ('415', '1', '172', '0');
+INSERT INTO `oa_role_menu` VALUES ('416', '1', '173', '0');
+INSERT INTO `oa_role_menu` VALUES ('417', '1', '174', '0');
+INSERT INTO `oa_role_menu` VALUES ('418', '1', '175', '0');
+INSERT INTO `oa_role_menu` VALUES ('419', '1', '176', '0');
+INSERT INTO `oa_role_menu` VALUES ('420', '1', '177', '0');
+INSERT INTO `oa_role_menu` VALUES ('421', '1', '178', '0');
+INSERT INTO `oa_role_menu` VALUES ('422', '1', '179', '0');
+INSERT INTO `oa_role_menu` VALUES ('423', '1', '180', '0');
+INSERT INTO `oa_role_menu` VALUES ('424', '1', '181', '0');
+INSERT INTO `oa_role_menu` VALUES ('425', '1', '182', '0');
+INSERT INTO `oa_role_menu` VALUES ('426', '1', '183', '0');
+INSERT INTO `oa_role_menu` VALUES ('427', '1', '184', '0');
+INSERT INTO `oa_role_menu` VALUES ('428', '1', '185', '0');
+INSERT INTO `oa_role_menu` VALUES ('429', '1', '186', '0');
+INSERT INTO `oa_role_menu` VALUES ('430', '1', '187', '0');
+INSERT INTO `oa_role_menu` VALUES ('431', '1', '188', '0');
+INSERT INTO `oa_role_menu` VALUES ('432', '1', '189', '0');
+INSERT INTO `oa_role_menu` VALUES ('433', '1', '190', '0');
+INSERT INTO `oa_role_menu` VALUES ('434', '1', '191', '0');
 
 -- ----------------------------
 -- Table structure for oa_schedule_job
@@ -1137,7 +1267,7 @@ CREATE TABLE `oa_system_log` (
   `lg_create_user` int(11) NOT NULL,
   `lg_create_date` datetime NOT NULL,
   PRIMARY KEY (`lg_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=466 DEFAULT CHARSET=utf8 COMMENT='系统操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=562 DEFAULT CHARSET=utf8 COMMENT='系统操作日志表';
 
 -- ----------------------------
 -- Records of oa_system_log
@@ -1599,6 +1729,102 @@ INSERT INTO `oa_system_log` VALUES ('462', 'cn.fjlcx.application.controller.admi
 INSERT INTO `oa_system_log` VALUES ('463', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:wages:rp:read\",\"muIconcls\":\"icon-medal-bronze-2\",\"muId\":156,\"muPid\":151,\"muState\":\"open\",\"muText\":\"员工奖惩管理\",\"muType\":0,\"muUrl\":\"\"};', '23', '2018-03-11 09:06:00');
 INSERT INTO `oa_system_log` VALUES ('464', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:wages:assessment:read\",\"muIconcls\":\"icon-layout\",\"muId\":157,\"muPid\":151,\"muState\":\"open\",\"muText\":\"考核信息管理\",\"muType\":0,\"muUrl\":\"\"};', '23', '2018-03-11 09:08:32');
 INSERT INTO `oa_system_log` VALUES ('465', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"yggl\",\"muIconcls\":\"icon-node\",\"muId\":167,\"muPid\":154,\"muState\":\"open\",\"muText\":\"员工信息\",\"muType\":0,\"muUrl\":\"\"};', '23', '2018-03-11 09:12:42');
+INSERT INTO `oa_system_log` VALUES ('466', 'cn.fjlcx.application.controller.admin.DictionaryTypeController.insert()', '新增字典分类', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dtCode\":\"Marriage\",\"dtDescription\":\"婚姻状况\",\"dtName\":\"婚姻状况\"};', '23', '2018-03-17 07:52:36');
+INSERT INTO `oa_system_log` VALUES ('467', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"married\",\"dictDescription\":\"已婚\",\"dictName\":\"已婚\",\"dictTypeId\":14};', '23', '2018-03-17 07:53:32');
+INSERT INTO `oa_system_log` VALUES ('468', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"unmarried\",\"dictDescription\":\"未婚\",\"dictName\":\"未婚\",\"dictTypeId\":14};', '23', '2018-03-17 07:53:49');
+INSERT INTO `oa_system_log` VALUES ('469', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"Divorce\",\"dictDescription\":\"离异\",\"dictName\":\"离异\",\"dictTypeId\":3};', '23', '2018-03-17 07:54:02');
+INSERT INTO `oa_system_log` VALUES ('470', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521216000000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emMarriage\":46,\"emName\":\"12\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-02-26,2018-03-13\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:06:28');
+INSERT INTO `oa_system_log` VALUES ('471', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521216000000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emMarriage\":46,\"emName\":\"12\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-02-26,2018-03-13\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:10:44');
+INSERT INTO `oa_system_log` VALUES ('472', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521216000000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emMarriage\":46,\"emName\":\"12\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-02-26,2018-03-13\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:10:55');
+INSERT INTO `oa_system_log` VALUES ('473', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521216000000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emMarriage\":46,\"emName\":\"1\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-19,2018-03-22\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:11:41');
+INSERT INTO `oa_system_log` VALUES ('474', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521216000000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emMarriage\":46,\"emName\":\"1\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-19,2018-03-22\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:11:51');
+INSERT INTO `oa_system_log` VALUES ('475', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521561600000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emMarriage\":46,\"emName\":\"2\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-12\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:12:22');
+INSERT INTO `oa_system_log` VALUES ('476', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1522080000000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emMarriage\":46,\"emName\":\"1\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-02-27\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:13:34');
+INSERT INTO `oa_system_log` VALUES ('477', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1520956800000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emMarriage\":46,\"emName\":\"1\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-12\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:13:59');
+INSERT INTO `oa_system_log` VALUES ('478', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1520956800000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"1\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-06\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:14:50');
+INSERT INTO `oa_system_log` VALUES ('479', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1520265600000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"1\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-02-27\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:17:19');
+INSERT INTO `oa_system_log` VALUES ('480', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1520956800000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"3\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-06\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:19:57');
+INSERT INTO `oa_system_log` VALUES ('481', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521648000000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"1\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-23\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:20:42');
+INSERT INTO `oa_system_log` VALUES ('482', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521561600000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"3\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-14\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:21:51');
+INSERT INTO `oa_system_log` VALUES ('483', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521561600000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"5\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-09\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:22:19');
+INSERT INTO `oa_system_log` VALUES ('484', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1522166400000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"6\",\"emNation\":26,\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-22\",\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 08:22:49');
+INSERT INTO `oa_system_log` VALUES ('485', 'cn.fjlcx.application.controller.admin.DictionaryTypeController.insert()', '新增字典分类', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dtCode\":\"EmployeeStatus\",\"dtDescription\":\"员工任职状态\",\"dtName\":\"员工任职状态\"};', '23', '2018-03-17 08:26:57');
+INSERT INTO `oa_system_log` VALUES ('486', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"Internship\",\"dictDescription\":\"实习\",\"dictName\":\"实习\",\"dictTypeId\":15};', '23', '2018-03-17 08:27:26');
+INSERT INTO `oa_system_log` VALUES ('487', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"On trial\",\"dictDescription\":\"试用\",\"dictName\":\"试用\",\"dictTypeId\":15};', '23', '2018-03-17 08:27:45');
+INSERT INTO `oa_system_log` VALUES ('488', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"Job\",\"dictDescription\":\"在职\",\"dictName\":\"在职\",\"dictTypeId\":15};', '23', '2018-03-17 08:28:01');
+INSERT INTO `oa_system_log` VALUES ('489', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"Quit\",\"dictDescription\":\"离职\",\"dictName\":\"离职\",\"dictTypeId\":15};', '23', '2018-03-17 08:28:20');
+INSERT INTO `oa_system_log` VALUES ('490', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1520956800000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"1\",\"emNation\":26,\"emPosition\":\"10\",\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-28\",\"emStatus\":49,\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 09:05:48');
+INSERT INTO `oa_system_log` VALUES ('491', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1520870400000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"1\",\"emNation\":26,\"emPosition\":\"10\",\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-07\",\"emStatus\":49,\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-17 09:08:33');
+INSERT INTO `oa_system_log` VALUES ('492', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:contract:select\",\"muIconcls\":\"icon-node\",\"muPid\":165,\"muState\":\"open\",\"muText\":\"查询\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-17 10:17:13');
+INSERT INTO `oa_system_log` VALUES ('493', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:contract:insert\",\"muIconcls\":\"icon-node\",\"muPid\":165,\"muState\":\"open\",\"muText\":\"新增\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-17 10:33:57');
+INSERT INTO `oa_system_log` VALUES ('494', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:contract:update\",\"muIconcls\":\"icon-node\",\"muPid\":165,\"muState\":\"open\",\"muText\":\"编辑\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-17 10:34:15');
+INSERT INTO `oa_system_log` VALUES ('495', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:contract:delete\",\"muIconcls\":\"icon-node\",\"muPid\":165,\"muState\":\"open\",\"muText\":\"删除\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-17 10:34:29');
+INSERT INTO `oa_system_log` VALUES ('496', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:wages:select\",\"muIconcls\":\"icon-node\",\"muPid\":155,\"muState\":\"open\",\"muText\":\"查询\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-17 11:18:30');
+INSERT INTO `oa_system_log` VALUES ('497', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:wages:list\",\"muIconcls\":\"icon-money\",\"muId\":155,\"muPid\":151,\"muState\":\"open\",\"muText\":\"工资信息管理\",\"muType\":0,\"muUrl\":\"admin/wages/list\"};', '23', '2018-03-17 11:26:25');
+INSERT INTO `oa_system_log` VALUES ('498', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:rewardPunishment:list\",\"muIconcls\":\"icon-medal-bronze-2\",\"muId\":156,\"muPid\":151,\"muState\":\"open\",\"muText\":\"员工奖惩管理\",\"muType\":0,\"muUrl\":\"admin/rewardPunishment/list\"};', '23', '2018-03-17 14:01:47');
+INSERT INTO `oa_system_log` VALUES ('499', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:rewardPunishment:select\",\"muIconcls\":\"icon-node\",\"muPid\":156,\"muState\":\"open\",\"muText\":\"查询\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-17 14:02:09');
+INSERT INTO `oa_system_log` VALUES ('500', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:wages:assessment:read\",\"muIconcls\":\"icon-layout\",\"muId\":157,\"muPid\":151,\"muState\":\"open\",\"muText\":\"考勤信息管理\",\"muType\":0,\"muUrl\":\"\"};', '23', '2018-03-17 14:11:37');
+INSERT INTO `oa_system_log` VALUES ('501', 'cn.fjlcx.application.controller.admin.DictionaryTypeController.insert()', '新增字典分类', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dtCode\":\"TrainingMode\",\"dtDescription\":\"培训方式\",\"dtName\":\"培训方式\"};', '23', '2018-03-17 14:48:37');
+INSERT INTO `oa_system_log` VALUES ('502', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"InnerTraining\",\"dictDescription\":\"内训\",\"dictName\":\"内训\",\"dictTypeId\":16};', '23', '2018-03-17 14:49:05');
+INSERT INTO `oa_system_log` VALUES ('503', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"External training\",\"dictDescription\":\"外训\",\"dictName\":\"外训\",\"dictTypeId\":16};', '23', '2018-03-17 14:49:25');
+INSERT INTO `oa_system_log` VALUES ('504', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:course:list\",\"muIconcls\":\"icon-node\",\"muId\":159,\"muPid\":152,\"muState\":\"open\",\"muText\":\"培训课程管理\",\"muType\":0,\"muUrl\":\"admin/course/list\"};', '23', '2018-03-17 18:18:24');
+INSERT INTO `oa_system_log` VALUES ('505', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:course:select\",\"muIconcls\":\"icon-node\",\"muPid\":159,\"muState\":\"open\",\"muText\":\"查询\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-17 18:20:11');
+INSERT INTO `oa_system_log` VALUES ('506', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:course:insert\",\"muIconcls\":\"icon-node\",\"muPid\":159,\"muState\":\"open\",\"muText\":\"新增\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-17 19:21:49');
+INSERT INTO `oa_system_log` VALUES ('507', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:course:update\",\"muIconcls\":\"icon-node\",\"muPid\":159,\"muState\":\"open\",\"muText\":\"编辑\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-17 19:22:21');
+INSERT INTO `oa_system_log` VALUES ('508', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:course:delete\",\"muIconcls\":\"icon-node\",\"muPid\":159,\"muState\":\"open\",\"muText\":\"删除\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-17 19:22:40');
+INSERT INTO `oa_system_log` VALUES ('509', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:attendance:list\",\"muIconcls\":\"icon-layout\",\"muId\":157,\"muPid\":151,\"muState\":\"open\",\"muText\":\"考勤信息管理\",\"muType\":0,\"muUrl\":\"system/attendance/list\"};', '23', '2018-03-18 08:52:59');
+INSERT INTO `oa_system_log` VALUES ('510', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:attendance:select\",\"muIconcls\":\"icon-node\",\"muPid\":157,\"muState\":\"open\",\"muText\":\"查询\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-18 08:53:24');
+INSERT INTO `oa_system_log` VALUES ('511', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:attendance:list\",\"muIconcls\":\"icon-layout\",\"muId\":157,\"muPid\":151,\"muState\":\"open\",\"muText\":\"考勤信息管理\",\"muType\":0,\"muUrl\":\"admin/attendance/list\"};', '23', '2018-03-18 08:54:13');
+INSERT INTO `oa_system_log` VALUES ('512', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:rewardPunishment:insert\",\"muIconcls\":\"icon-node\",\"muPid\":156,\"muState\":\"open\",\"muText\":\"新增\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-18 09:22:38');
+INSERT INTO `oa_system_log` VALUES ('513', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:rewardPunishment:update\",\"muIconcls\":\"icon-node\",\"muPid\":156,\"muState\":\"open\",\"muText\":\"编辑\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-18 09:22:53');
+INSERT INTO `oa_system_log` VALUES ('514', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:rewardPunishment:delete\",\"muIconcls\":\"icon-node\",\"muPid\":156,\"muState\":\"open\",\"muText\":\"删除\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-18 09:23:09');
+INSERT INTO `oa_system_log` VALUES ('515', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521043200000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"lcx001\",\"emNation\":26,\"emPosition\":\"10\",\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-13\",\"emStatus\":49,\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-18 11:28:14');
+INSERT INTO `oa_system_log` VALUES ('516', 'cn.fjlcx.application.controller.admin.RewardPunishmentController.insert()', '新增RewardPunishment', '0', '0:0:0:0:0:0:0:1', null, null, '{\"alAllowance\":1000.0,\"apEmId\":23,\"apMonth\":\"2018-02\",\"apProject\":36};', '23', '2018-03-18 11:34:36');
+INSERT INTO `oa_system_log` VALUES ('517', 'cn.fjlcx.application.controller.admin.RewardPunishmentController.insert()', '新增RewardPunishment', '0', '0:0:0:0:0:0:0:1', null, null, '{\"alAllowance\":100.0,\"apEmId\":23,\"apMonth\":\"2018-03\",\"apProject\":36};', '23', '2018-03-18 11:35:47');
+INSERT INTO `oa_system_log` VALUES ('518', 'cn.fjlcx.application.controller.admin.RewardPunishmentController.insert()', '新增RewardPunishment', '0', '0:0:0:0:0:0:0:1', null, null, '{\"alAllowance\":1.0,\"apEmId\":23,\"apMonth\":\"2018-02\",\"apProject\":36};', '23', '2018-03-18 13:42:46');
+INSERT INTO `oa_system_log` VALUES ('519', 'cn.fjlcx.application.controller.admin.RewardPunishmentController.insert()', '新增RewardPunishment', '0', '0:0:0:0:0:0:0:1', null, null, '{\"alAllowance\":2.0,\"apEmId\":23,\"apMonth\":\"2018-03\",\"apProject\":36};', '23', '2018-03-18 13:44:00');
+INSERT INTO `oa_system_log` VALUES ('520', 'cn.fjlcx.application.controller.admin.RewardPunishmentController.insert()', '新增RewardPunishment', '0', '0:0:0:0:0:0:0:1', null, null, '{\"alAllowance\":2.0,\"apEmId\":22,\"apMonth\":\"2018-02\",\"apProject\":36};', '23', '2018-03-18 13:44:26');
+INSERT INTO `oa_system_log` VALUES ('521', 'cn.fjlcx.application.controller.admin.RewardPunishmentController.insert()', '新增RewardPunishment', '0', '0:0:0:0:0:0:0:1', null, null, '{\"alAllowance\":1.0,\"apEmId\":22,\"apMonth\":\"2018-02\",\"apProject\":36};', '23', '2018-03-18 13:46:44');
+INSERT INTO `oa_system_log` VALUES ('522', 'cn.fjlcx.application.controller.admin.RewardPunishmentController.insert()', '新增RewardPunishment', '0', '0:0:0:0:0:0:0:1', null, null, '{\"alAllowance\":1.0,\"apEmId\":23,\"apMonth\":\"2018-04\",\"apProject\":37};', '23', '2018-03-18 13:46:55');
+INSERT INTO `oa_system_log` VALUES ('523', 'cn.fjlcx.application.controller.admin.RewardPunishmentController.delete()', '删除rewardPunishment', '0', '0:0:0:0:0:0:0:1', null, null, '3;', '23', '2018-03-18 13:51:06');
+INSERT INTO `oa_system_log` VALUES ('524', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:attendance:insert\",\"muIconcls\":\"icon-node\",\"muPid\":157,\"muState\":\"open\",\"muText\":\"新增\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-18 13:52:37');
+INSERT INTO `oa_system_log` VALUES ('525', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:attendance:update\",\"muIconcls\":\"icon-node\",\"muPid\":157,\"muState\":\"open\",\"muText\":\"编辑\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-18 13:52:53');
+INSERT INTO `oa_system_log` VALUES ('526', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:attendance:delete\",\"muIconcls\":\"icon-node\",\"muPid\":157,\"muState\":\"open\",\"muText\":\"删除\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-18 13:53:04');
+INSERT INTO `oa_system_log` VALUES ('527', 'cn.fjlcx.application.controller.admin.RewardPunishmentController.insert()', '新增RewardPunishment', '0', '0:0:0:0:0:0:0:1', null, null, '{\"alAllowance\":2.0,\"alDescription\":\"3\",\"apDescription\":\"3\",\"apEmId\":23,\"apMonth\":\"2018-02\",\"apProject\":36};', '23', '2018-03-18 14:05:28');
+INSERT INTO `oa_system_log` VALUES ('528', 'cn.fjlcx.application.controller.AttendanceController.insert()', '新增Attendance', '0', '0:0:0:0:0:0:0:1', null, null, '{\"atAbsentdays\":3.0,\"atEmId\":23,\"atLate\":1.0,\"atLeavedays\":2.0,\"atMonth\":\"2018-04\",\"atOvertime\":2.0,\"atWorkdays\":18.0};', '23', '2018-03-18 14:09:06');
+INSERT INTO `oa_system_log` VALUES ('529', 'cn.fjlcx.application.controller.AttendanceController.insert()', '新增Attendance', '0', '0:0:0:0:0:0:0:1', null, null, '{\"atAbsentdays\":4.0,\"atEmId\":22,\"atLate\":5.0,\"atLeavedays\":2.0,\"atMonth\":\"2018-04\",\"atOvertime\":3.0,\"atWorkdays\":1.0};', '23', '2018-03-18 14:09:28');
+INSERT INTO `oa_system_log` VALUES ('530', 'cn.fjlcx.application.controller.AttendanceController.delete()', '删除attendance', '0', '0:0:0:0:0:0:0:1', null, null, '1;', '23', '2018-03-18 14:10:07');
+INSERT INTO `oa_system_log` VALUES ('531', 'cn.fjlcx.application.controller.admin.DictionaryTypeController.insert()', '新增字典分类', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dtCode\":\"TeachingMode\",\"dtDescription\":\"授课方式\",\"dtName\":\"授课方式\"};', '23', '2018-03-18 14:20:47');
+INSERT INTO `oa_system_log` VALUES ('532', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"FaceTeache\",\"dictDescription\":\"面授\",\"dictName\":\"面授\",\"dictTypeId\":17};', '23', '2018-03-18 14:21:16');
+INSERT INTO `oa_system_log` VALUES ('533', 'cn.fjlcx.application.controller.admin.DictionaryController.insert()', '新增字典', '0', '0:0:0:0:0:0:0:1', null, null, '{\"dictCode\":\"RemoteTeaching\",\"dictDescription\":\"远程教授\",\"dictName\":\"远程教授\",\"dictTypeId\":17};', '23', '2018-03-18 14:21:41');
+INSERT INTO `oa_system_log` VALUES ('534', 'cn.fjlcx.application.controller.CourseController.insert()', '新增Course', '0', '0:0:0:0:0:0:0:1', null, null, '{};', '23', '2018-03-18 14:42:25');
+INSERT INTO `oa_system_log` VALUES ('535', 'cn.fjlcx.application.controller.CourseController.insert()', '新增Course', '0', '0:0:0:0:0:0:0:1', null, null, '{};', '23', '2018-03-18 14:44:56');
+INSERT INTO `oa_system_log` VALUES ('536', 'cn.fjlcx.application.controller.CourseController.insert()', '新增Course', '0', '0:0:0:0:0:0:0:1', null, null, '{};', '23', '2018-03-18 14:49:38');
+INSERT INTO `oa_system_log` VALUES ('537', 'cn.fjlcx.application.controller.CourseController.insert()', '新增Course', '0', '0:0:0:0:0:0:0:1', null, null, '{};', '23', '2018-03-18 15:00:00');
+INSERT INTO `oa_system_log` VALUES ('538', 'cn.fjlcx.application.controller.CourseController.delete()', '删除course', '0', '0:0:0:0:0:0:0:1', null, null, '2;', '23', '2018-03-18 15:04:27');
+INSERT INTO `oa_system_log` VALUES ('539', 'cn.fjlcx.application.controller.CourseController.delete()', '删除course', '0', '0:0:0:0:0:0:0:1', null, null, '1;', '23', '2018-03-18 15:04:30');
+INSERT INTO `oa_system_log` VALUES ('540', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1521302400000,\"emCulture\":14,\"emDepartment\":\"18123456789\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"lcx02\",\"emNation\":26,\"emPosition\":\"10\",\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-18\",\"emStatus\":49,\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-18 15:06:30');
+INSERT INTO `oa_system_log` VALUES ('541', 'cn.fjlcx.application.controller.admin.MenuController.DeleteMenuById()', '根据id删除指定菜单', '0', '0:0:0:0:0:0:0:1', null, null, '158;', '23', '2018-03-18 15:47:56');
+INSERT INTO `oa_system_log` VALUES ('542', 'cn.fjlcx.application.controller.admin.ContractController.insert()', '新增Contract', '0', '0:0:0:0:0:0:0:1', null, null, '{\"conEmId\":\"24\",\"conEndtime\":1521475200000,\"conPeriod\":2,\"conRemark\":\"3000\",\"conStarttime\":1521302400000,\"conType\":34,\"conWage\":3000.0};', '23', '2018-03-18 16:13:32');
+INSERT INTO `oa_system_log` VALUES ('543', 'cn.fjlcx.application.controller.admin.ContractController.insert()', '新增Contract', '0', '0:0:0:0:0:0:0:1', null, null, '{\"conEmId\":\"24\",\"conEndtime\":1521475200000,\"conPeriod\":3,\"conRemark\":\"45\",\"conStarttime\":1521302400000,\"conType\":35,\"conWage\":2000.0};', '23', '2018-03-18 17:22:31');
+INSERT INTO `oa_system_log` VALUES ('544', 'cn.fjlcx.application.controller.admin.ContractController.delete()', '删除contract', '0', '0:0:0:0:0:0:0:1', null, null, '2;', '23', '2018-03-18 17:23:06');
+INSERT INTO `oa_system_log` VALUES ('545', 'cn.fjlcx.application.controller.admin.ContractController.insert()', '新增Contract', '0', '0:0:0:0:0:0:0:1', null, null, '{\"conEmId\":\"22\",\"conEndtime\":1521648000000,\"conPeriod\":1,\"conRemark\":\"3\",\"conStarttime\":1521475200000,\"conType\":34,\"conWage\":2.0};', '23', '2018-03-18 17:29:38');
+INSERT INTO `oa_system_log` VALUES ('546', 'cn.fjlcx.application.controller.admin.ContractController.insert()', '新增Contract', '0', '0:0:0:0:0:0:0:1', null, null, '{\"conEmId\":\"23\",\"conEndtime\":1521561600000,\"conPeriod\":30000,\"conRemark\":\"30000\",\"conStarttime\":1521388800000,\"conType\":34,\"conWage\":30000.0};', '23', '2018-03-18 17:30:05');
+INSERT INTO `oa_system_log` VALUES ('547', 'cn.fjlcx.application.controller.admin.ContractController.delete()', '删除contract', '0', '0:0:0:0:0:0:0:1', null, null, '3;', '23', '2018-03-18 17:30:30');
+INSERT INTO `oa_system_log` VALUES ('548', 'cn.fjlcx.application.controller.admin.CourseController.insert()', '新增Course', '0', '0:0:0:0:0:0:0:1', null, null, '{\"couEndtime\":1521302400000,\"couFee\":1.0,\"couLearner\":\"1\",\"couName\":\"1\",\"couSponsor\":\"1\",\"couStarttime\":1521302400000,\"couTeachinghours\":1.0,\"couTeachingmethods\":55,\"couTrainingmethods\":53};', '23', '2018-03-18 17:35:13');
+INSERT INTO `oa_system_log` VALUES ('549', 'cn.fjlcx.application.controller.admin.CourseController.insert()', '新增Course', '0', '0:0:0:0:0:0:0:1', null, null, '{\"couEndtime\":1521561600000,\"couFee\":2.0,\"couLearner\":\"2\",\"couName\":\"2\",\"couSponsor\":\"2\",\"couStarttime\":1521302400000,\"couTeachinghours\":2.0,\"couTeachingmethods\":55,\"couTrainingmethods\":53};', '23', '2018-03-18 18:02:39');
+INSERT INTO `oa_system_log` VALUES ('550', 'cn.fjlcx.application.controller.admin.CourseController.delete()', '删除course', '0', '0:0:0:0:0:0:0:1', null, null, '3;', '23', '2018-03-18 18:02:43');
+INSERT INTO `oa_system_log` VALUES ('551', 'cn.fjlcx.application.controller.admin.AttendanceController.delete()', '删除attendance', '0', '0:0:0:0:0:0:0:1', null, null, '3;', '23', '2018-03-18 20:15:59');
+INSERT INTO `oa_system_log` VALUES ('552', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:contract:list\",\"muIconcls\":\"icon-folder-page\",\"muId\":165,\"muPid\":153,\"muState\":\"open\",\"muText\":\"合同管理\",\"muType\":0,\"muUrl\":\"admin/contract/list\"};', '23', '2018-03-18 20:18:26');
+INSERT INTO `oa_system_log` VALUES ('553', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:course:list\",\"muIconcls\":\"icon-script\",\"muId\":159,\"muPid\":152,\"muState\":\"open\",\"muText\":\"培训课程管理\",\"muType\":0,\"muUrl\":\"admin/course/list\"};', '23', '2018-03-18 20:19:50');
+INSERT INTO `oa_system_log` VALUES ('554', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:resource:read\",\"muIconcls\":\"icon-package\",\"muId\":152,\"muPid\":0,\"muState\":\"open\",\"muText\":\"资源管理\",\"muType\":0,\"muUrl\":\"\"};', '23', '2018-03-18 20:21:13');
+INSERT INTO `oa_system_log` VALUES ('555', 'cn.fjlcx.application.controller.admin.EmployerController.delete()', '删除employer', '0', '0:0:0:0:0:0:0:1', null, null, '24;', '23', '2018-03-18 20:58:50');
+INSERT INTO `oa_system_log` VALUES ('556', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1520265600000,\"emCulture\":14,\"emDepartment\":\"29\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"lcx002\",\"emNation\":26,\"emPosition\":\"10\",\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-13\",\"emStatus\":51,\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-18 21:13:00');
+INSERT INTO `oa_system_log` VALUES ('557', 'cn.fjlcx.application.controller.admin.EmployerController.insert()', '新增Employer', '0', '0:0:0:0:0:0:0:1', null, null, '{\"emAddress\":\"18123456789\",\"emAncestralhome\":\"jiguan\",\"emBasewages\":3000.0,\"emBorn\":1519660800000,\"emCulture\":14,\"emDepartment\":\"29\",\"emEmail\":\"1@qq.com\",\"emGender\":2,\"emGraduationschool\":\"18123456789\",\"emIdcard\":\"350526199409197518\",\"emMarriage\":46,\"emName\":\"lcx001\",\"emNation\":26,\"emPosition\":\"10\",\"emSpeciality\":\"18123456789\",\"emStartime\":\"2018-03-29\",\"emStatus\":49,\"emTel\":\"18123456789\",\"emVisage\":22};', '23', '2018-03-18 21:24:48');
+INSERT INTO `oa_system_log` VALUES ('558', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:wages:insert\",\"muIconcls\":\"icon-node\",\"muPid\":155,\"muState\":\"open\",\"muText\":\"新增\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-18 21:36:04');
+INSERT INTO `oa_system_log` VALUES ('559', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:wages:update\",\"muIconcls\":\"icon-node\",\"muPid\":155,\"muState\":\"open\",\"muText\":\"编辑\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-18 21:36:20');
+INSERT INTO `oa_system_log` VALUES ('560', 'cn.fjlcx.application.controller.admin.MenuController.UpdateMenu()', '更新菜单信息', '0', '0:0:0:0:0:0:0:1', null, null, '{\"muChecked\":false,\"muCode\":\"system:wages:delete\",\"muIconcls\":\"icon-node\",\"muPid\":155,\"muState\":\"open\",\"muText\":\"删除\",\"muType\":1,\"muUrl\":\"\"};', '23', '2018-03-18 21:36:32');
+INSERT INTO `oa_system_log` VALUES ('561', 'cn.fjlcx.application.controller.admin.RewardPunishmentController.insert()', '新增RewardPunishment', '0', '0:0:0:0:0:0:0:1', null, null, '{\"alAllowance\":10000.0,\"alDescription\":\"10000\",\"apDescription\":\"10000\",\"apEmId\":26,\"apMonth\":\"2018-02\",\"apProject\":36};', '23', '2018-03-18 21:38:23');
 
 -- ----------------------------
 -- Table structure for oa_update_log
@@ -1677,3 +1903,34 @@ INSERT INTO `oa_user_role` VALUES ('29', '47', '11', '1');
 INSERT INTO `oa_user_role` VALUES ('30', '49', '2', '1');
 INSERT INTO `oa_user_role` VALUES ('31', '24', '12', '1');
 INSERT INTO `oa_user_role` VALUES ('32', '36', '2', '1');
+
+-- ----------------------------
+-- Table structure for oa_wages
+-- ----------------------------
+DROP TABLE IF EXISTS `oa_wages`;
+CREATE TABLE `oa_wages` (
+  `w_id` int(11) NOT NULL,
+  `w_em_name` varchar(255) DEFAULT NULL,
+  `w_month` int(2) DEFAULT NULL,
+  `w_baseWages` double(10,0) DEFAULT NULL,
+  `w_overtimeCost` double(10,0) DEFAULT NULL,
+  `w_agePay` double(10,0) DEFAULT NULL,
+  `w_fullWork` double(10,0) DEFAULT NULL,
+  `w_allBonus` double(10,0) DEFAULT NULL,
+  `w_allowance` double(10,0) DEFAULT NULL,
+  `w_absenceCost` double(10,0) DEFAULT '0',
+  `w_penaltyCost` double(10,0) DEFAULT NULL,
+  `w_endowmentInsurance` double(10,0) DEFAULT NULL,
+  `w_unemploymentInsurance` double(10,0) DEFAULT NULL,
+  `w_medicalInsurance` double(10,0) DEFAULT NULL,
+  `w_grossPay` double(10,0) DEFAULT NULL,
+  `w_deductWages` double(10,0) DEFAULT NULL,
+  `w_netPayroll` double(10,0) DEFAULT NULL,
+  PRIMARY KEY (`w_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of oa_wages
+-- ----------------------------
+INSERT INTO `oa_wages` VALUES ('1', 'sad', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `oa_wages` VALUES ('2', 'sad', '1', '1', '1', '1', '11', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');

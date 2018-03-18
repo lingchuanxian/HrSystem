@@ -3,14 +3,14 @@
  */
 
 $(function(){
-	getType($("#search-mm"),"PoliticalOutlook");
+	loadForSelect($('#search-type-combox'),"admin/employer/selectAll","emId","emName",false);
 	var datagrid; //定义全局变量datagrid
 	var editRow = undefined; //定义全局变量：当前编辑的行
 	datagrid = $("#data-table").datagrid({
 		dnd: true,
 		method:"POST",
-		url:getRootPath() + "admin/employer/select",
-		idField:'emId',
+		url:getRootPath() + "admin/attendance/select",
+		idField:'conId',
 		rownumbers: true,
 		checkOnSelect : true,  
 		width: $(window).width() - 6,
@@ -39,95 +39,50 @@ $(function(){
 		},
 		columns:[[
 			{
-				field:'emId',
+				field:'atId',
 				title:"编号",
 				width:100,
 				align:'center'
 			},{
-				field:'emName',
-				title:"姓名",
-				width:150,
-				align:'center',
-			},{
-				field:'mGender',
-				title:"性别",
-				width:50,
-				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
-			},{
-				field:'emTel',
-				title:"手机号码",
-				width:150,
-				align:'center',
-			},{
-				field:'mDepartment',
-				title:"部门",
+				field:'mEmployer',
+				title:"员工名称",
 				width:150,
 				align:'center',
 				formatter:function(val){  
 					if(val){  
-						return val.depName;  
+						return val.emName; 
 					}  
 				},  
 			},{
-				field:'mPosition',
-				title:"职务",
-				width:130,
-				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
-			},{
-				field:'mCulture',
-				title:"文化程度",
-				width:100,
-				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
-			},{
-				field:'mVisage',
-				title:"政治面貌",
+				field:'atMonth',
+				title:"年月",
 				width:150,
 				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
 			},{
-				field:'emAncestralhome',
-				title:"籍贯",
+				field:'atWorkdays',
+				title:"出勤天数",
+				width:150,
+				align:'center',
+			},{
+				field:'atOvertime',
+				title:"加班天数",
+				width:150,
+				align:'center',
+			},{
+				field:'atLeavedays',
+				title:"请假天数",
 				width:100,
 				align:'center',
 			},{
-				field:'emBasewages',
-				title:"基本工资（元）",
+				field:'atAbsentdays',
+				title:"缺席天数",
 				width:100,
 				align:'center',
 			},{
-				field:'emAddress',
-				title:"家庭地址",
-				width:200,
-				align:'center',
-			},{
-				field:'mStatus',
-				title:"状态",
+				field:'atLate',
+				title:"迟到天数",
 				width:100,
 				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
 			}
 			]],
 			toolbar:'#toolbar',
@@ -137,63 +92,68 @@ $(function(){
 	});
 	
 	//############################	搜索开始	###############################
-	$("#search-type").combobox({
-		onChange: function (n,o) {
-			if($(this).val() == 0){
-				$(".td_name").show();
-				$(".td_type").hide();
-				$(".td_mm").hide();
-				$(".td_jg").hide();
-			}else if($(this).val() == 1){
-				$(".td_name").hide();
-				$(".td_type").show();
-				$(".td_mm").hide();
-				$(".td_jg").hide();
-			}else if($(this).val() == 2){
-				$(".td_name").hide();
-				$(".td_type").hide();
-				$(".td_mm").show();
-				$(".td_jg").hide();
-			}else if($(this).val() == 3){
-				$(".td_name").hide();
-				$(".td_type").hide();
-				$(".td_mm").hide();
-				$(".td_jg").show();
-			}
-		}
-	});
-	
 	$("#btnSearch").click(function(){
+		console.log("search");
 		doSearch();
 	});
 
 	function doSearch(){
-		var type = $("#search-type").val();
-		if(type == 0){
-			$('#data-table').datagrid('load',{
-				stype: 0,
-				skey: $('#search-name').val()
-			});
-		}else if(type == 1){
-			$('#data-table').datagrid('load',{
-				stype: 1,
-				skey: $('#search-type-combox').val()
-			});
-		}else if(type == 2){
-			$('#data-table').datagrid('load',{
-				stype: 2,
-				skey: $('#search-mm').val()
-			});
-		}else if(type == 2){
-			$('#data-table').datagrid('load',{
-				stype: 3,
-				skey: $('#search-jg').val()
-			});
-		}
+		$('#data-table').datagrid('load',{
+			stype: 0,
+			skey: $('#search-type-combox').val()
+		});
 	}
 	
 	//############################	搜索结束	###############################
 
+	//###########################	新增开始	############################
+
+	$("#add").click(function(){
+		loadForSelect($('#employer-combox'),"admin/employer/selectAll","emId","emName",true);
+		$('#add-box').dialog("open");
+		$("#add-form").form("disableValidation");
+	});
+
+	$('#add-box').dialog({
+		title: '考勤信息新增',
+		width: 400,
+		height: 400,
+		closed: true,
+		cache: false,
+		modal: true,
+		buttons:[{
+			text:'保存',
+			iconCls:'icon-ok',
+			handler:function(){
+				formAddSubmit();
+			}
+		},{
+			text:'取消',
+			iconCls:'icon-cancel',
+			handler:function(){
+				$('#add-box').dialog("close");
+			}
+		}]
+	});
+
+
+	function formAddSubmit(){
+		$('#add-form').form('submit', {
+			url:getRootPath() + 'admin/attendance/insert',
+			onSubmit: function(){
+				return $(this).form('enableValidation').form('validate');
+			},
+			success:function(data){
+				$('#add-box').dialog("close");
+				$('#add-form').form("clear");
+				datagrid.datagrid("reload");
+			}
+		});
+	}
+
+	//###########################	新增结束	############################
+	
+	
 	//###########################	编辑开始	############################
 
 	$("#edit").click(function(){
@@ -285,15 +245,15 @@ $(function(){
 	function doDelete() {
 		var selectRows =datagrid.treegrid("getSelections");
 		if (selectRows.length < 1) {
-			$.messager.alert("提示消息", "请选择要删除的员工!");
+			$.messager.alert("提示消息", "请选择要删除的考勤记录!");
 			return;
 		}
 		//提醒用户是否是真的删除数据
-		$.messager.confirm("确认消息", "您确定要删除员工【"+selectRows[0].emName+"】吗？", function (r) {
+		$.messager.confirm("确认消息", "您确定要删除该考勤记录吗？", function (r) {
 			if (r) {
 				MaskUtil.mask();
 				$.ajax({
-					url: getRootPath() + "admin/employer/delete/"+selectRows[0].emId,
+					url: getRootPath() + "admin/attendance/delete/"+selectRows[0].atId,
 					type: "post",
 					dataType: "json",
 					success: function (data) {

@@ -1,5 +1,6 @@
-package ${basePackage}.controller;
+package cn.fjlcx.application.controller.admin;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,41 +21,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import cn.fjlcx.application.bean.${modelNameUpperCamel};
+import cn.fjlcx.application.bean.RewardPunishment;
 import cn.fjlcx.application.config.SystemControllerLog;
 import cn.fjlcx.application.core.Result;
 import cn.fjlcx.application.core.ResultGenerator;
-import cn.fjlcx.application.service.${modelNameUpperCamel}Service;
+import cn.fjlcx.application.service.RewardPunishmentService;
 
 /**
- * @author ${author} 
+ * @author ling_cx 
  * @version 1.0
  * @Description 
- * @date ${date}.
+ * @date 2018/03/17.
  * @Copyright: 2018 www.lingcx.cn Inc. All rights reserved.
  */
 @Controller
-@RequestMapping("admin/${modelNameLowerCamel}")
-public class ${modelNameUpperCamel}Controller {
-	private static final Logger logger = LoggerFactory.getLogger(${modelNameUpperCamel}Controller.class);
+@RequestMapping("admin/rewardPunishment")
+public class RewardPunishmentController {
+	private static final Logger logger = LoggerFactory.getLogger(RewardPunishmentController.class);
     @Resource
-    private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
+    private RewardPunishmentService rewardPunishmentService;
    
-    @RequiresPermissions("system:${modelNameLowerCamel}:list")
+    @RequiresPermissions("system:rewardPunishment:list")
 	@GetMapping("list")
 	public String List() {
-		return "admin/${modelNameLowerCamel}/list";
+		return "admin/rewardPunishment/list";
 	}
     
     /**
-     * 获取${modelNameUpperCamel}列表
+     * 获取RewardPunishment列表
      * @param page
      * @param rows
      * @param stype
      * @param skey
      * @return
      */
-    @RequiresPermissions("system:${modelNameLowerCamel}:select")
+    @RequiresPermissions("system:rewardPunishment:select")
 	@PostMapping("select")
 	@ResponseBody
 	public Result select(int page,int rows,String stype,String skey) {
@@ -63,8 +64,8 @@ public class ${modelNameUpperCamel}Controller {
     	Map<String,Object> params1 = new HashMap<String, Object>();
 		params1.put("stype", stype);
 		params1.put("skey", skey);
-		List<${modelNameUpperCamel}> artList = ${modelNameLowerCamel}Service.select${modelNameUpperCamel}ByCondition(params1);
-		PageInfo<${modelNameUpperCamel}> pageData=new PageInfo<${modelNameUpperCamel}>(artList);
+		List<RewardPunishment> artList = rewardPunishmentService.selectRewardPunishmentByCondition(params1);
+		PageInfo<RewardPunishment> pageData=new PageInfo<RewardPunishment>(artList);
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("total", pageData.getTotal());
 		params.put("rows",pageData.getList());
@@ -72,58 +73,59 @@ public class ${modelNameUpperCamel}Controller {
 	}
     
     /**
-     * 新增${modelNameUpperCamel}
+     * 新增RewardPunishment
      * @param dict
      * @return
      */
-    @RequiresPermissions("system:${modelNameLowerCamel}:insert")
+    @RequiresPermissions("system:rewardPunishment:insert")
 	@PostMapping("insert")
-	@SystemControllerLog(description = "新增${modelNameUpperCamel}")   
+	@SystemControllerLog(description = "新增RewardPunishment")   
 	@ResponseBody
-	public Result insert(@ModelAttribute ${modelNameUpperCamel} model) {
+	public Result insert(@ModelAttribute RewardPunishment model) {
     	//dict.setDictOrder(dictionaryService.selectMaxOrder()+1);
-    	${modelNameLowerCamel}Service.save(model);
+    	model.setAlDate(new Date());
+    	rewardPunishmentService.save(model);
 		return ResultGenerator.genSuccessResult().setMessage("新增成功");
 	}
     
     /**
-     * 查询${modelNameUpperCamel}
+     * 查询RewardPunishment
      * @param id
      * @return
      */
-    @RequiresPermissions("system:${modelNameLowerCamel}:select")
+    @RequiresPermissions("system:rewardPunishment:select")
 	@PostMapping("select/{id}")
 	@ResponseBody
 	public Result selectById(@PathVariable int id) {
-    	${modelNameUpperCamel} model = ${modelNameLowerCamel}Service.findById(id);
+    	RewardPunishment model = rewardPunishmentService.findById(id);
 		return ResultGenerator.genSuccessResult(model);
 	}
     
     /**
-     * 更新${modelNameUpperCamel}
+     * 更新RewardPunishment
      * @param type
      * @return
      */
-    @RequiresPermissions("system:${modelNameLowerCamel}:update")
+    @RequiresPermissions("system:rewardPunishment:update")
 	@PostMapping("update")
-	@SystemControllerLog(description = "更新${modelNameLowerCamel}")   
+	@SystemControllerLog(description = "更新rewardPunishment")   
 	@ResponseBody
-	public Result update(@ModelAttribute ${modelNameUpperCamel} model) {
-    	${modelNameLowerCamel}Service.update(model);
+	public Result update(@ModelAttribute RewardPunishment model) {
+    	rewardPunishmentService.update(model);
 		return ResultGenerator.genSuccessResult().setMessage("更新成功");
 	}
     
     /**
-     * 删除${modelNameUpperCamel}
+     * 删除RewardPunishment
      * @param type
      * @return
      */
-    @RequiresPermissions("system:${modelNameLowerCamel}:delete")
+    @RequiresPermissions("system:rewardPunishment:delete")
 	@PostMapping("delete/{id}")
-	@SystemControllerLog(description = "删除${modelNameLowerCamel}")   
+	@SystemControllerLog(description = "删除rewardPunishment")   
 	@ResponseBody
 	public Result delete(@PathVariable int id) {
-    	${modelNameLowerCamel}Service.deleteById(id);
+    	rewardPunishmentService.deleteById(id);
 		return ResultGenerator.genSuccessResult().setMessage("删除成功");
 	}
 

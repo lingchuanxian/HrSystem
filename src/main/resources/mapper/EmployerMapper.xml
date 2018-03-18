@@ -1,41 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fjlcx.application.mapper.EmployerMapper">
-  <resultMap id="BaseResultMap" type="cn.fjlcx.application.bean.Employer">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="em_id" jdbcType="INTEGER" property="emId" />
-    <result column="em_name" jdbcType="VARCHAR" property="emName" />
-    <result column="em_gender" jdbcType="INTEGER" property="emGender" />
-    <result column="em_IDCard" jdbcType="VARCHAR" property="emIdcard" />
-    <result column="em_born" jdbcType="TIMESTAMP" property="emBorn" />
-    <result column="em_nation" jdbcType="INTEGER" property="emNation" />
-    <result column="em_marriage" jdbcType="INTEGER" property="emMarriage" />
-    <result column="em_visage" jdbcType="INTEGER" property="emVisage" />
-    <result column="em_ancestralHome" jdbcType="VARCHAR" property="emAncestralhome" />
-    <result column="em_tel" jdbcType="VARCHAR" property="emTel" />
-    <result column="em_address" jdbcType="VARCHAR" property="emAddress" />
-    <result column="em_email" jdbcType="VARCHAR" property="emEmail" />
-    <result column="em_culture" jdbcType="INTEGER" property="emCulture" />
-    <result column="em_graduationSchool" jdbcType="VARCHAR" property="emGraduationschool" />
-    <result column="em_speciality" jdbcType="VARCHAR" property="emSpeciality" />
-    <result column="em_starTime" jdbcType="TIMESTAMP" property="emStartime" />
-    <result column="em_workAge" jdbcType="INTEGER" property="emWorkage" />
-    <result column="em_department" jdbcType="INTEGER" property="emDepartment" />
-    <result column="em_position" jdbcType="INTEGER" property="emPosition" />
-    <result column="em_title" jdbcType="VARCHAR" property="emTitle" />
-    <result column="em_baseWages" jdbcType="DOUBLE" property="emBasewages" />
-    <result column="em_otherWages" jdbcType="DOUBLE" property="emOtherwages" />
-    <result column="em_status" jdbcType="INTEGER" property="emStatus" />
-    <result column="em_createTime" jdbcType="VARCHAR" property="emCreatetime" />
-    <result column="em_createName" jdbcType="VARCHAR" property="emCreatename" />
-    <result column="em_photo" jdbcType="LONGVARCHAR" property="emPhoto" />
-  </resultMap>
-  
-  <select id="selectEmployerByCondition" resultMap="BaseResultMap">
-  	select * from oa_employer
-  	<if test="stype == 0">
+	<resultMap id="BaseResultMap" type="cn.fjlcx.application.bean.Employer">
+		<!-- WARNING - @mbg.generated -->
+		<id column="em_id" jdbcType="INTEGER" property="emId" />
+		<result column="em_name" jdbcType="VARCHAR" property="emName" />
+		<result column="em_IDCard" jdbcType="VARCHAR" property="emIdcard" />
+		<result column="em_born" jdbcType="TIMESTAMP" property="emBorn" />
+		<result column="em_ancestralHome" jdbcType="VARCHAR" property="emAncestralhome" />
+		<result column="em_tel" jdbcType="VARCHAR" property="emTel" />
+		<result column="em_address" jdbcType="VARCHAR" property="emAddress" />
+		<result column="em_email" jdbcType="VARCHAR" property="emEmail" />
+		<result column="em_graduationSchool" jdbcType="VARCHAR"
+			property="emGraduationschool" />
+		<result column="em_speciality" jdbcType="VARCHAR" property="emSpeciality" />
+		<result column="em_starTime" jdbcType="TIMESTAMP" property="emStartime" />
+		<result column="em_workAge" jdbcType="INTEGER" property="emWorkage" />
+		<result column="em_title" jdbcType="VARCHAR" property="emTitle" />
+		<result column="em_baseWages" jdbcType="DOUBLE" property="emBasewages" />
+		<result column="em_otherWages" jdbcType="DOUBLE" property="emOtherwages" />
+		<result column="em_createTime" jdbcType="VARCHAR" property="emCreatetime" />
+		<result column="em_createName" jdbcType="VARCHAR" property="emCreatename" />
+		<result column="em_photo" jdbcType="LONGVARCHAR" property="emPhoto" />
+		
+		<association property="mGender" column="em_gender"
+			javaType="cn.fjlcx.application.bean.Dictionary"
+			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+		</association>
+		<association property="mDepartment" column="em_department"
+			javaType="cn.fjlcx.application.bean.Department"
+			select="cn.fjlcx.application.mapper.DepartmentMapper.selectDepartmentById">
+		</association>
+		<association property="mNation" column="em_nation"
+			javaType="cn.fjlcx.application.bean.Dictionary"
+			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+		</association>
+		<association property="mMarriage" column="em_marriage"
+			javaType="cn.fjlcx.application.bean.Dictionary"
+			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+		</association>
+		<association property="mVisage" column="em_visage"
+			javaType="cn.fjlcx.application.bean.Dictionary"
+			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+		</association>
+		<association property="mCulture" column="em_culture"
+			javaType="cn.fjlcx.application.bean.Dictionary"
+			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+		</association>
+		<association property="mStatus" column="em_status"
+			javaType="cn.fjlcx.application.bean.Dictionary"
+			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+		</association>
+		<association property="mPosition" column="em_position"
+			javaType="cn.fjlcx.application.bean.Dictionary"
+			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+		</association>
+	</resultMap>
+
+	<select id="selectEmployerByCondition" resultMap="BaseResultMap">
+		select * from oa_employer
+		<if test="stype == 0">
 			where em_name LIKE CONCAT(CONCAT('%',#{skey}),'%')
 		</if>
 		<if test="stype == 1">
@@ -45,8 +69,14 @@
 			where em_visage LIKE CONCAT(CONCAT('%',#{skey}),'%')
 		</if>
 		<if test="stype == 3">
-			where em_ancestralHome LIKE CONCAT(CONCAT('%',#{skey}),'%')
+			where em_ancestralHome LIKE
+			CONCAT(CONCAT('%',#{skey}),'%')
 		</if>
 		order by em_createTime DESC
-  </select>  
+	</select>
+	
+	<select id="selectEmployerById" parameterType="int" resultMap="BaseResultMap">
+		SELECT * from oa_employer where em_id = #{id}  
+	</select>
+	
 </mapper>

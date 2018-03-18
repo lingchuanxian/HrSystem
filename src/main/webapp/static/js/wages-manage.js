@@ -3,14 +3,13 @@
  */
 
 $(function(){
-	getType($("#search-mm"),"PoliticalOutlook");
 	var datagrid; //定义全局变量datagrid
 	var editRow = undefined; //定义全局变量：当前编辑的行
 	datagrid = $("#data-table").datagrid({
 		dnd: true,
 		method:"POST",
-		url:getRootPath() + "admin/employer/select",
-		idField:'emId',
+		url:getRootPath() + "admin/wages/select",
+		idField:'wId',
 		rownumbers: true,
 		checkOnSelect : true,  
 		width: $(window).width() - 6,
@@ -39,95 +38,80 @@ $(function(){
 		},
 		columns:[[
 			{
-				field:'emId',
+				field:'wId',
 				title:"编号",
 				width:100,
 				align:'center'
 			},{
-				field:'emName',
-				title:"姓名",
+				field:'wMonth',
+				title:"工资月份",
 				width:150,
 				align:'center',
 			},{
-				field:'mGender',
-				title:"性别",
-				width:50,
-				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
-			},{
-				field:'emTel',
-				title:"手机号码",
+				field:'wEmName',
+				title:"员工姓名",
 				width:150,
 				align:'center',
 			},{
-				field:'mDepartment',
-				title:"部门",
+				field:'wBasewages',
+				title:"基本工资",
 				width:150,
 				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.depName;  
-					}  
-				},  
 			},{
-				field:'mPosition',
-				title:"职务",
-				width:130,
-				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
-			},{
-				field:'mCulture',
-				title:"文化程度",
-				width:100,
-				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
-			},{
-				field:'mVisage',
-				title:"政治面貌",
+				field:'wOvertimecost',
+				title:"加班工资",
 				width:150,
 				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
 			},{
-				field:'emAncestralhome',
-				title:"籍贯",
-				width:100,
+				field:'wAgepay',
+				title:"工龄工资",
+				width:150,
 				align:'center',
 			},{
-				field:'emBasewages',
-				title:"基本工资（元）",
-				width:100,
+				field:'wFullwork',
+				title:"全勤奖",
+				width:150,
 				align:'center',
 			},{
-				field:'emAddress',
-				title:"家庭地址",
-				width:200,
+				field:'wAllowance',
+				title:"职务补贴",
+				width:150,
 				align:'center',
 			},{
-				field:'mStatus',
-				title:"状态",
-				width:100,
+				field:'wAbsencecost',
+				title:"旷工金额",
+				width:150,
 				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
+			},{
+				field:'wEndowmentinsurance',
+				title:"养老保险",
+				width:150,
+				align:'center',
+			},{
+				field:'wUnemploymentinsurance',
+				title:"失业保险",
+				width:150,
+				align:'center',
+			},{
+				field:'wMedicalinsurance',
+				title:"医疗保险",
+				width:150,
+				align:'center',
+			},{
+				field:'wGrosspay',
+				title:"应发工资",
+				width:150,
+				align:'center',
+			},{
+				field:'wDeductwages',
+				title:"应扣工资",
+				width:150,
+				align:'center',
+			},{
+				field:'wNetpayroll',
+				title:"实发工资",
+				width:150,
+				align:'center',
 			}
 			]],
 			toolbar:'#toolbar',

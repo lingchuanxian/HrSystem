@@ -80,7 +80,7 @@ public class Employer {
     @Column(name = "em_speciality")
     private String emSpeciality;
     /**
-     * 开始工作时间
+     * 入职时间
      */
     @Column(name = "em_starTime")
     private String emStartime;
@@ -124,6 +124,87 @@ public class Employer {
 
     @Column(name = "em_photo")
     private String emPhoto;
+
+    @Transient
+    private Dictionary mGender;
+    @Transient
+    private Dictionary mNation;
+    @Transient
+    private Dictionary mMarriage;
+    @Transient
+    private Dictionary mVisage;
+    @Transient
+    private Dictionary mCulture;
+    @Transient
+    private Dictionary mStatus;
+    @Transient
+    private Dictionary mPosition;
+    @Transient
+    private Department mDepartment;
+    
+	public Department getmDepartment() {
+		return mDepartment;
+	}
+
+	public void setmDepartment(Department mDepartment) {
+		this.mDepartment = mDepartment;
+	}
+
+	public Dictionary getmNation() {
+		return mNation;
+	}
+
+	public Dictionary getmGender() {
+		return mGender;
+	}
+
+	public void setmGender(Dictionary mGender) {
+		this.mGender = mGender;
+	}
+
+	public void setmNation(Dictionary mNation) {
+		this.mNation = mNation;
+	}
+
+	public Dictionary getmMarriage() {
+		return mMarriage;
+	}
+
+	public void setmMarriage(Dictionary mMarriage) {
+		this.mMarriage = mMarriage;
+	}
+
+	public Dictionary getmVisage() {
+		return mVisage;
+	}
+
+	public void setmVisage(Dictionary mVisage) {
+		this.mVisage = mVisage;
+	}
+
+	public Dictionary getmCulture() {
+		return mCulture;
+	}
+
+	public void setmCulture(Dictionary mCulture) {
+		this.mCulture = mCulture;
+	}
+
+	public Dictionary getmStatus() {
+		return mStatus;
+	}
+
+	public void setmStatus(Dictionary mStatus) {
+		this.mStatus = mStatus;
+	}
+
+	public Dictionary getmPosition() {
+		return mPosition;
+	}
+
+	public void setmPosition(Dictionary mPosition) {
+		this.mPosition = mPosition;
+	}
 
 	public Integer getEmId() {
 		return emId;

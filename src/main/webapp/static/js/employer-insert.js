@@ -9,6 +9,8 @@ $(function(){
 	getType($("#PoliticalOutlook-combox"),"PoliticalOutlook");
 	getType($("#DegreeOfEducation-combox"),"DegreeOfEducation");
 	getType($("#Position-combox"),"Duties");
+	getType($("#Status-combox"),"EmployeeStatus");
+	loadForSelect($('#Department-combox'),"admin/department/selectDepByOrgGet?id=1","depId","depName",true);
 	function getType(combobox,code){
 		combobox.combobox({  
 			method:"POST",
@@ -40,8 +42,8 @@ $(function(){
 				return $(this).form('enableValidation').form('validate');
 			},
 			success:function(data){
-				console.log(data);
-				
+					$('#employer-form').form('clear');  
+					$.messager.alert("提示消息", "登记成功!");
 			},
 			error:function(e){
 				$.messager.alert("提示消息", e.message,"error");

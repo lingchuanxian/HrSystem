@@ -49,5 +49,30 @@ function HandleException(data){
 			window.location.href="/login";
 		});
 	}
+}
 
+function loadForSelect(combobox,url,valueField,textField,autoSelect){
+	combobox.combobox({  
+		method:"POST",
+		url:getRootPath() + url,  
+		valueField:valueField,  
+		textField:textField,
+		editable:false,
+		loadFilter: function(data){
+			if (data.code == 200){
+				console.log("loadForSelect:"+data);
+				return data.data;
+			}else{
+				HandleException(data);
+			}
+		},
+		onLoadSuccess: function () { 
+			var data = $(this).combobox("getData");
+			if(autoSelect){
+				if(data.length > 0){
+					$(this).combobox("select", data[0][valueField]);
+				}
+			}
+		}
+	});  
 }

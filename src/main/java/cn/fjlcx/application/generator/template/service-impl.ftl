@@ -1,5 +1,7 @@
 package ${basePackage}.service.impl;
 
+import java.util.List;
+import java.util.Map;
 import ${basePackage}.mapper.${modelNameUpperCamel}Mapper;
 import ${basePackage}.bean.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
@@ -8,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import cn.fjlcx.application.bean.${modelNameUpperCamel};
+import cn.fjlcx.application.mapper.${modelNameUpperCamel}Mapper;
+import cn.fjlcx.application.service.${modelNameUpperCamel}Service;
 
 /**
  * @author ${author} 

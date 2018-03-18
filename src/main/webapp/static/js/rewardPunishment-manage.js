@@ -3,14 +3,14 @@
  */
 
 $(function(){
-	getType($("#search-mm"),"PoliticalOutlook");
+	loadForSelect($('#search-type-combox'),"admin/employer/selectAll","emId","emName",false);
 	var datagrid; //定义全局变量datagrid
 	var editRow = undefined; //定义全局变量：当前编辑的行
 	datagrid = $("#data-table").datagrid({
 		dnd: true,
 		method:"POST",
-		url:getRootPath() + "admin/employer/select",
-		idField:'emId',
+		url:getRootPath() + "admin/rewardPunishment/select",
+		idField:'conId',
 		rownumbers: true,
 		checkOnSelect : true,  
 		width: $(window).width() - 6,
@@ -39,93 +39,53 @@ $(function(){
 		},
 		columns:[[
 			{
-				field:'emId',
+				field:'apId',
 				title:"编号",
 				width:100,
 				align:'center'
 			},{
-				field:'emName',
-				title:"姓名",
+				field:'apMonth',
+				title:"奖惩月份",
 				width:150,
 				align:'center',
 			},{
-				field:'mGender',
-				title:"性别",
-				width:50,
-				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
-			},{
-				field:'emTel',
-				title:"手机号码",
-				width:150,
-				align:'center',
-			},{
-				field:'mDepartment',
-				title:"部门",
+				field:'mEmployer',
+				title:"奖惩员工",
 				width:150,
 				align:'center',
 				formatter:function(val){  
 					if(val){  
-						return val.depName;  
+						return val.emName; 
 					}  
 				},  
 			},{
-				field:'mPosition',
-				title:"职务",
-				width:130,
-				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
-			},{
-				field:'mCulture',
-				title:"文化程度",
-				width:100,
-				align:'center',
-				formatter:function(val){  
-					if(val){  
-						return val.dictName;  
-					}  
-				},  
-			},{
-				field:'mVisage',
-				title:"政治面貌",
+				field:'mProject',
+				title:"奖惩项目",
 				width:150,
 				align:'center',
 				formatter:function(val){  
 					if(val){  
-						return val.dictName;  
+						return val.dictName;
 					}  
 				},  
 			},{
-				field:'emAncestralhome',
-				title:"籍贯",
+				field:'alAllowance',
+				title:"奖惩金额",
 				width:100,
 				align:'center',
 			},{
-				field:'emBasewages',
-				title:"基本工资（元）",
+				field:'apDescription',
+				title:"描述",
 				width:100,
 				align:'center',
 			},{
-				field:'emAddress',
-				title:"家庭地址",
-				width:200,
-				align:'center',
-			},{
-				field:'mStatus',
-				title:"状态",
+				field:'alDate',
+				title:"添加日期",
 				width:100,
 				align:'center',
 				formatter:function(val){  
 					if(val){  
-						return val.dictName;  
+						return jsonYearMonthDay(val); 
 					}  
 				},  
 			}
@@ -135,64 +95,69 @@ $(function(){
 				datagrid.datagrid("unselectAll");
 			}
 	});
-	
+
 	//############################	搜索开始	###############################
-	$("#search-type").combobox({
-		onChange: function (n,o) {
-			if($(this).val() == 0){
-				$(".td_name").show();
-				$(".td_type").hide();
-				$(".td_mm").hide();
-				$(".td_jg").hide();
-			}else if($(this).val() == 1){
-				$(".td_name").hide();
-				$(".td_type").show();
-				$(".td_mm").hide();
-				$(".td_jg").hide();
-			}else if($(this).val() == 2){
-				$(".td_name").hide();
-				$(".td_type").hide();
-				$(".td_mm").show();
-				$(".td_jg").hide();
-			}else if($(this).val() == 3){
-				$(".td_name").hide();
-				$(".td_type").hide();
-				$(".td_mm").hide();
-				$(".td_jg").show();
-			}
-		}
-	});
-	
+
 	$("#btnSearch").click(function(){
 		doSearch();
 	});
 
 	function doSearch(){
-		var type = $("#search-type").val();
-		if(type == 0){
-			$('#data-table').datagrid('load',{
-				stype: 0,
-				skey: $('#search-name').val()
-			});
-		}else if(type == 1){
-			$('#data-table').datagrid('load',{
-				stype: 1,
-				skey: $('#search-type-combox').val()
-			});
-		}else if(type == 2){
-			$('#data-table').datagrid('load',{
-				stype: 2,
-				skey: $('#search-mm').val()
-			});
-		}else if(type == 2){
-			$('#data-table').datagrid('load',{
-				stype: 3,
-				skey: $('#search-jg').val()
-			});
-		}
+		$('#data-table').datagrid('load',{
+			stype: 0,
+			skey: $('#search-type-combox').val()
+		});
 	}
-	
+
 	//############################	搜索结束	###############################
+
+	//###########################	新增开始	############################
+
+	$("#add").click(function(){
+		loadForSelect($('#add-type-combox'),"admin/employer/selectAll","emId","emName",true);
+		loadForSelect($('#ap-type-combox'),"admin/selectTypes/Reward&Punishment","dictId","dictName",true);
+		$('#add-box').dialog("open");
+		$("#add-form").form("disableValidation");
+	});
+
+	$('#add-box').dialog({
+		title: '奖惩信息新增',
+		width: 400,
+		height: 400,
+		closed: true,
+		cache: false,
+		modal: true,
+		buttons:[{
+			text:'保存',
+			iconCls:'icon-ok',
+			handler:function(){
+				formAddSubmit();
+			}
+		},{
+			text:'取消',
+			iconCls:'icon-cancel',
+			handler:function(){
+				$('#add-box').dialog("close");
+			}
+		}]
+	});
+
+
+	function formAddSubmit(){
+		$('#add-form').form('submit', {
+			url:getRootPath() + 'admin/rewardPunishment/insert',
+			onSubmit: function(){
+				return $(this).form('enableValidation').form('validate');
+			},
+			success:function(data){
+				$('#add-box').dialog("close");
+				$('#add-form').form("clear");
+				datagrid.datagrid("reload");
+			}
+		});
+	}
+
+	//###########################	新增结束	############################
 
 	//###########################	编辑开始	############################
 
@@ -285,15 +250,15 @@ $(function(){
 	function doDelete() {
 		var selectRows =datagrid.treegrid("getSelections");
 		if (selectRows.length < 1) {
-			$.messager.alert("提示消息", "请选择要删除的员工!");
+			$.messager.alert("提示消息", "请选择要删除的奖惩记录!");
 			return;
 		}
 		//提醒用户是否是真的删除数据
-		$.messager.confirm("确认消息", "您确定要删除员工【"+selectRows[0].emName+"】吗？", function (r) {
+		$.messager.confirm("确认消息", "您确定要删除奖惩记录【"+selectRows[0].mEmployer.emName+"["+selectRows[0].mProject.dictName+"]"+"】吗？", function (r) {
 			if (r) {
 				MaskUtil.mask();
 				$.ajax({
-					url: getRootPath() + "admin/employer/delete/"+selectRows[0].emId,
+					url: getRootPath() + "admin/rewardPunishment/delete/"+selectRows[0].apId,
 					type: "post",
 					dataType: "json",
 					success: function (data) {
@@ -339,7 +304,7 @@ $(function(){
 		});  
 	}
 	//###########################	加载类别结束	############################
-	
+
 	function getType(combobox,code){
 		combobox.combobox({  
 			method:"POST",

@@ -196,3 +196,4 @@ function closeTab(action) {
 		break;
 	}
 }
+

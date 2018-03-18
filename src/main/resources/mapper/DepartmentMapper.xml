@@ -27,6 +27,10 @@
 		select * from oa_department where dep_id = #{id}
 		<include refid="expectisdel"></include>
 	</select>
+	
+	<select id="selectDepartmentById" parameterType="int" resultMap="BaseResultMap">
+		select * from oa_department where dep_id = #{id}
+	</select>
 
 	<select id="selectMaxOrder" resultType="int">
 		select max(dep_order) from oa_department

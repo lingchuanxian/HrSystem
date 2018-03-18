@@ -251,6 +251,24 @@ public class CommonController extends BaseController{
 		List<Dictionary> list = dictionaryService.selectDictionaryByCondition(params1);
 		return ResultGenerator.genSuccessResult(list);
 	}
+	
+	@RequiresAuthentication
+	@PostMapping("admin/selectTypes/{code}")
+	@ResponseBody
+	public Result selectTypes(@PathVariable String code) {
+		List<Dictionary> resultList = new ArrayList<>();
+		String cd[] = code.split("&");
+		for(int i = 0 ;i < cd.length; i++) {
+			DictionaryType dt = dictionaryTypeService.selectByCode(cd[i]);
+			Map<String,Object> params1 = new HashMap<String, Object>();
+			params1.put("stype", 2);
+			params1.put("skey", dt.getDtId());
+			List<Dictionary> list = dictionaryService.selectDictionaryByCondition(params1);
+			resultList.addAll(list);
+		}
+		return ResultGenerator.genSuccessResult(resultList);
+	}
+
 
 	/**
 	 * 注销登录，通过配置文件交给shiro处理
