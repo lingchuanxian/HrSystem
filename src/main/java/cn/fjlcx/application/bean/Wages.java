@@ -9,7 +9,7 @@ public class Wages {
     private Integer wId;
 
     @Column(name = "w_month")
-    private Integer wMonth;
+    private String wMonth;
 
     @Column(name = "w_em_name")
     private String wEmName;
@@ -109,14 +109,14 @@ public class Wages {
     /**
      * @return w_month
      */
-    public Integer getwMonth() {
+    public String getwMonth() {
         return wMonth;
     }
 
     /**
      * @param wMonth
      */
-    public void setwMonth(Integer wMonth) {
+    public void setwMonth(String wMonth) {
         this.wMonth = wMonth;
     }
 

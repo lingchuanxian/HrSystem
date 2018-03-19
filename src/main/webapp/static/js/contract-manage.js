@@ -125,7 +125,7 @@ $(function(){
 	$('#add-box').dialog({
 		title: '合同信息新增',
 		width: 400,
-		height: 400,
+		height: 500,
 		closed: true,
 		cache: false,
 		modal: true,

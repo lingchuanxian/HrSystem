@@ -6,7 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="w_id" jdbcType="INTEGER" property="wId" />
-    <result column="w_month" jdbcType="INTEGER" property="wMonth" />
+    <result column="w_month" jdbcType="VARCHAR" property="wMonth" />
     <result column="w_em_name" jdbcType="VARCHAR" property="wEmName" />
     <result column="w_baseWages" jdbcType="DOUBLE" property="wBasewages" />
     <result column="w_overtimeCost" jdbcType="DOUBLE" property="wOvertimecost" />
@@ -26,5 +26,8 @@
   
   <select id="selectWagesByCondition" resultMap="BaseResultMap">
 		select * from oa_wages
+		<if test="stype == 0">
+			where w_em_name LIKE CONCAT(CONCAT('%',#{skey}),'%') 
+		</if>
 	</select>
 </mapper>

@@ -34,8 +34,8 @@
 						<td class="td_name">姓名：<input class="easyui-textbox"
 							type="text" id="search-name" style="width: 200px" /></td>
 						<td class="td_type" style="display: none;">部门： <input
-							class="easyui-combobox" editable="false" id="search-type-combox"
-							style="width: 128px;" name="artType" />
+							class="easyui-combobox" editable="false" id="department-combox"
+							style="width: 128px;" />
 						</td>
 						<td class="td_mm" style="display: none;">政治面貌：
 						<input	class="easyui-combobox" editable="false" id="search-mm"
@@ -57,6 +57,10 @@
 			<a href="javascript:;" class="easyui-linkbutton"
 				iconCls="icon-application-form-edit" plain="true" id="edit">编辑</a>
 		</shiro:hasPermission>
+		<shiro:hasPermission name="system:employer:update">
+			<a href="javascript:;" class="easyui-linkbutton"
+				iconCls="icon-application-form-edit" plain="true" id="edit-status">编辑状态</a>
+		</shiro:hasPermission>
 		<shiro:hasPermission name="system:employer:delete">
 			<a href="javascript:;" class="easyui-linkbutton"
 				iconCls="icon-application-form-delete" plain="true" id="delete">删除</a>
@@ -64,6 +68,26 @@
 	</div>
 	<div data-options="region:'center',split:false">
 		<table id="data-table"></table>
+	</div>
+	
+	<!-- 编辑状态表单 -->
+	<div class="box" id="edit-status-box" style="display: none;">
+		<form id="edit-status-form" method="post">
+			<table class="rb-org" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="td_key">员工姓名：</td>
+					<td class="td_val">
+					<input type="hidden" name="emId" id="emId">
+					<span class="val_emName"></span></td>
+				</tr>
+				<tr>
+					<td class="td_key">员工状态：</td>
+					<td class="td_val"><input class="easyui-combobox"
+							editable="false" style="width: 204px;"
+							id="Status-combox" name="emStatus"></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 
 	<script type="text/javascript" src="static/js/employer-manage.js"></script>

@@ -82,6 +82,9 @@ public class WagesController {
 	@ResponseBody
 	public Result insert(@ModelAttribute Wages model) {
     	//dict.setDictOrder(dictionaryService.selectMaxOrder()+1);
+    	model.setwGrosspay(model.getwBasewages()+model.getwOvertimecost()+model.getwAgepay()+model.getwFullwork()+model.getwAllbonus()+model.getwAllowance());
+    	model.setwDeductwages(model.getwAbsencecost()+model.getwEndowmentinsurance()+model.getwUnemploymentinsurance()+model.getwMedicalinsurance());
+    	model.setwNetpayroll(model.getwGrosspay() - model.getwDeductwages());
     	wagesService.save(model);
 		return ResultGenerator.genSuccessResult().setMessage("新增成功");
 	}

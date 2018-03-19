@@ -4,6 +4,7 @@
 
 $(function(){
 	getType($("#search-mm"),"PoliticalOutlook");
+	loadForSelect($('#department-combox'),"admin/department/selectDepByOrgGet?id=1","depId","depName",true);
 	var datagrid; //定义全局变量datagrid
 	var editRow = undefined; //定义全局变量：当前编辑的行
 	datagrid = $("#data-table").datagrid({
@@ -177,14 +178,14 @@ $(function(){
 		}else if(type == 1){
 			$('#data-table').datagrid('load',{
 				stype: 1,
-				skey: $('#search-type-combox').val()
+				skey: $('#department-combox').val()
 			});
 		}else if(type == 2){
 			$('#data-table').datagrid('load',{
 				stype: 2,
 				skey: $('#search-mm').val()
 			});
-		}else if(type == 2){
+		}else if(type == 3){
 			$('#data-table').datagrid('load',{
 				stype: 3,
 				skey: $('#search-jg').val()
@@ -194,6 +195,85 @@ $(function(){
 	
 	//############################	搜索结束	###############################
 
+	//###########################	编辑状态开始	############################
+
+	$("#edit-status").click(function(){
+		statusEdit();
+		getType($("#Status-combox"),"EmployeeStatus");
+		loadForSelect($('#Status-combox'),"admin/selectType/EmployeeStatus","dictId","dictName",false);
+	});
+
+	function statusEdit(){
+		var selectRows =datagrid.treegrid("getSelections");
+		if (selectRows.length < 1) {
+			$.messager.alert("提示消息", "请选择要编辑状态的人事信息!");
+			return;
+		}else if(selectRows.length > 1){
+			$.messager.alert("提示消息", "只能选择一条的记录!");
+			return;
+		}else{
+			$.ajax({
+				url: getRootPath() + "admin/employer/select/"+selectRows[0].emId,
+				type: "post",
+				dataType: "json",
+				success: function (data) {
+					if(data.code == 200){
+						console.log(data);
+						$("#emId").val(data.data.emId);
+						$(".val_emName").html(data.data.emName);
+						$("#Status-combox").combobox("select", data.data.emStatus);
+						$("#edit-status-form").form("disableValidation");
+						$('#edit-status-box').dialog("open");
+					}else{
+						HandleException(data);
+					}
+				}
+			});
+
+		}
+	}
+
+	$('#edit-status-box').dialog({
+		title: '员工状态编辑',
+		width: 400,
+		height: 300,
+		closed: true,
+		cache: false,
+		modal: true,
+		buttons:[{
+			text:'提交',
+			iconCls:'icon-ok',
+			handler:function(){
+				formEditStatusSubmit();
+			}
+		},{
+			text:'取消',
+			iconCls:'icon-cancel',
+			handler:function(){
+				$('#edit-status-box').dialog("close");
+			}
+		}]
+	});
+
+	function formEditStatusSubmit(){
+		$('#edit-status-form').form('submit', {
+			url:getRootPath() + 'admin/employer/update',
+			onSubmit: function(){
+				return $(this).form('enableValidation').form('validate');
+			},
+			success:function(data){
+				$("#edit-status-form").form('clear');
+				$('#edit-status-box').dialog("close");
+				datagrid.datagrid("reload");
+			},
+			error:function(){
+				alert("error");
+			}
+		});
+	}
+
+	//###########################	编辑状态结束	############################
+	
 	//###########################	编辑开始	############################
 
 	$("#edit").click(function(){
