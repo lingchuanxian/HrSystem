@@ -496,6 +496,8 @@ $(function(){
 		    	$('#permission-manage-box').dialog("open");
 		    },
 		    loadFilter: function(data){
+		    	console.log("menu-tree:");
+		    	console.log(data);
 				if (data.code == 200){
 					return data.data;
 				} else {

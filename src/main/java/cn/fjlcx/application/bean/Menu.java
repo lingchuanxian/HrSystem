@@ -183,7 +183,8 @@ public class Menu {
 	public String toString() {
 		return "Menu [muId=" + muId + ", muText=" + muText + ", muCode=" + muCode + ", muState=" + muState
 				+ ", muIconcls=" + muIconcls + ", muUrl=" + muUrl + ", muPid=" + muPid + ", muChecked=" + muChecked
-				+ ", muRequestUrl=" + muRequestUrl + ", muOrder=" + muOrder + "]";
+				+ ", muRequestUrl=" + muRequestUrl + ", muOrder=" + muOrder + ", muIsdel=" + muIsdel + ", muType="
+				+ muType + "]";
 	}
 
 	@Override

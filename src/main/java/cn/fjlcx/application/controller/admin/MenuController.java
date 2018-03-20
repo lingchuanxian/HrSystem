@@ -184,6 +184,7 @@ public class MenuController extends BaseController{
 		TreeJson tree = new TreeJson();
 		tree.setText("主菜单");
 		tree.setId(-1);
+		tree.setChecked(true);
 		tree.setChildren(TreeJson.formatTree(tjs));
 		treeList.add(tree);
 		return ResultGenerator.genSuccessResult(treeList);
@@ -199,7 +200,8 @@ public class MenuController extends BaseController{
 			tj.setState(menu.getMuState());
 			tj.setUrl(menu.getMuUrl());
 			for(RoleMenu rm:listRole) {
-				if(menu.getMuId() == rm.getMenu().getMuId()) {
+				if(menu.getMuId().equals(rm.getMenu().getMuId())) {
+					System.out.println("menu:"+menu.toString());
 					tj.setChecked(true);
 					break;
 				}else {
