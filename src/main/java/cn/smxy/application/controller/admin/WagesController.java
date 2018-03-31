@@ -112,6 +112,9 @@ public class WagesController {
 	@SystemControllerLog(description = "更新wages")   
 	@ResponseBody
 	public Result update(@ModelAttribute Wages model) {
+    	model.setwGrosspay(model.getwBasewages()+model.getwOvertimecost()+model.getwAgepay()+model.getwFullwork()+model.getwAllbonus()+model.getwAllowance());
+    	model.setwDeductwages(model.getwAbsencecost()+model.getwEndowmentinsurance()+model.getwUnemploymentinsurance()+model.getwMedicalinsurance());
+    	model.setwNetpayroll(model.getwGrosspay() - model.getwDeductwages());
     	wagesService.update(model);
 		return ResultGenerator.genSuccessResult().setMessage("更新成功");
 	}

@@ -128,6 +128,73 @@
 			</table>
 		</form>
 	</div>
+	
+	<!-- 编辑表单 -->
+	<div class="box" id="edit-box" style="display: none;">
+		<form id="edit-form" method="post">
+			<table class="rb-add-user" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="td_key">月份：</td>
+					<td class="td_val"><input type="hidden" name="wId" id="edit-wId"/>
+					<span id="edit-wMonth"></span>
+					</td>
+					<td class="td_key">员工姓名：</td>
+					<td class="td_val"><span id="edit-wEmName"></span></td>
+				</tr>
+				<tr>
+					<td class="td_key">基本工资：</td>
+					<td class="td_val"><input value="0.0" class="easyui-textbox" type="text"
+						data-options="required:true,validType:'intOrFloat'"
+						missingMessage="请填写基本工资" name="wBasewages" id="edit-wBasewages"/></td>
+					<td class="td_key">加班工资：</td>
+					<td class="td_val"><input value="0.0" class="easyui-textbox" type="text"
+						data-options="required:true,validType:'intOrFloat'"
+						missingMessage="请填写加班工资" name="wOvertimecost" id="edit-wOvertimecost"/></td>
+				</tr>
+				<tr>
+					<td class="td_key">工龄工资：</td>
+					<td class="td_val"><input value="0.0" class="easyui-textbox" type="text"
+						data-options="required:true,validType:'intOrFloat'" id="edit-wAgepay"
+						missingMessage="请填写工龄工资" name="wAgepay" /></td>
+					<td class="td_key">全勤奖金：</td>
+					<td class="td_val"><input value="0.0" class="easyui-textbox" type="text"
+						data-options="required:true,validType:'intOrFloat'" id="edit-wFullwork"
+						missingMessage="请填写全勤奖金" name="wFullwork" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">职务补贴：</td>
+					<td class="td_val"><input value="0.0" class="easyui-textbox" type="text"
+						data-options="required:true,validType:'intOrFloat'" id="edit-wAllowance"
+						missingMessage="请填写职务补贴" name="wAllowance" /></td>
+					<td class="td_key">奖励奖金：</td>
+					<td class="td_val"><input value="0.0" class="easyui-textbox" type="text"
+						data-options="required:true,validType:'intOrFloat'" id="edit-wAllbonus"
+						missingMessage="请填写奖励奖金" name="wAllbonus" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">养老保险：</td>
+					<td class="td_val"><input value="0.0" class="easyui-textbox" type="text"
+						data-options="required:true,validType:'intOrFloat'" id="edit-wEndowmentinsurance"
+						missingMessage="请填写养老保险" name="wEndowmentinsurance" /></td>
+					<td class="td_key">失业保险：</td>
+					<td class="td_val"><input value="0.0" class="easyui-textbox" type="text"
+						data-options="required:true,validType:'intOrFloat'" id="edit-wUnemploymentinsurance"
+						missingMessage="请填写失业保险" name="wUnemploymentinsurance" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">医疗保险：</td>
+					<td class="td_val"><input value="0.0" class="easyui-textbox" type="text"
+						data-options="required:true,validType:'intOrFloat'" id="edit-wMedicalinsurance"
+						missingMessage="请填写医疗保险" name="wMedicalinsurance" /></td>
+					<td class="td_key">旷工金额：</td>
+					<td class="td_val"><input value="0.0" class="easyui-textbox" type="text"
+						data-options="required:true,validType:'intOrFloat'" id="edit-wAbsencecost"
+						missingMessage="请填写旷工金额" name="wAbsencecost" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
 	<script type="text/javascript"
 		src="static/easyui/easy-date-yearmonth.js"></script>
 	<script type="text/javascript" src="static/js/wages-manage.js"></script>

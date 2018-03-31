@@ -196,26 +196,33 @@ $(function(){
 	function articleEdit(){
 		var selectRows =datagrid.treegrid("getSelections");
 		if (selectRows.length < 1) {
-			$.messager.alert("提示消息", "请选择要编辑的字典!");
+			$.messager.alert("提示消息", "请选择要编辑的工资信息!");
 			return;
 		}else if(selectRows.length > 1){
 			$.messager.alert("提示消息", "只能选择一条的记录!");
 			return;
 		}else{
 			$.ajax({
-				url: getRootPath() + "admin/dictionary/select/"+selectRows[0].dictId,
+				url: getRootPath() + "admin/wages/select/"+selectRows[0].wId,
 				type: "post",
 				dataType: "json",
 				success: function (data) {
 					if(data.code == 200){
 						var dict = data.data;
 						console.log(dict);
-						loadType($('#edit-type-combox'),2);
-						$("#edit-dictId").val(dict.dictId);
-						$("#edit-dictCode").textbox('setValue',dict.dictCode);
-						$("#edit-dictName").textbox("setValue", dict.dictName);
-						$("#edit-type-combox").combobox("select", dict.dictTypeId);
-						$("#edit-dictDescription").textbox("setValue", dict.dictDescription);
+						$("#edit-wId").val(dict.wId);
+						$("#edit-wMonth").html(dict.wMonth);
+						$("#edit-wEmName").html(dict.wEmName);
+						$("#edit-wBasewages").textbox('setValue',dict.wBasewages);
+						$("#edit-wOvertimecost").textbox("setValue", dict.wOvertimecost);
+						$("#edit-wAgepay").textbox('setValue',dict.wAgepay);
+						$("#edit-wFullwork").textbox("setValue", dict.wFullwork);
+						$("#edit-wAllowance").textbox('setValue',dict.wAllowance);
+						$("#edit-wAllbonus").textbox("setValue", dict.wAllbonus);
+						$("#edit-wEndowmentinsurance").textbox("setValue", dict.wEndowmentinsurance);
+						$("#edit-wUnemploymentinsurance").textbox('setValue',dict.wUnemploymentinsurance);
+						$("#edit-wMedicalinsurance").textbox("setValue", dict.wMedicalinsurance);
+						$("#edit-wAbsencecost").textbox("setValue", dict.wAbsencecost);
 						$("#edit-form").form("disableValidation");
 						$('#edit-box').dialog("open");
 					}else{
@@ -228,8 +235,8 @@ $(function(){
 	}
 
 	$('#edit-box').dialog({
-		title: '字典编辑',
-		width: 400,
+		title: '工资信息编辑',
+		width: 800,
 		height: 400,
 		closed: true,
 		cache: false,
@@ -251,7 +258,7 @@ $(function(){
 
 	function formEditSubmit(){
 		$('#edit-form').form('submit', {
-			url:getRootPath() + 'admin/dictionary/update',
+			url:getRootPath() + 'admin/wages/update',
 			onSubmit: function(){
 				return $(this).form('enableValidation').form('validate');
 			},
