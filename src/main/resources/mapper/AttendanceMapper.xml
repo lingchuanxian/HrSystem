@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.fjlcx.application.mapper.AttendanceMapper">
-  <resultMap id="BaseResultMap" type="cn.fjlcx.application.bean.Attendance">
+<mapper namespace="cn.smxy.application.mapper.AttendanceMapper">
+  <resultMap id="BaseResultMap" type="cn.smxy.application.bean.Attendance">
     <!--
       WARNING - @mbg.generated
     -->
@@ -15,8 +15,8 @@
     <result column="at_absentDays" jdbcType="DOUBLE" property="atAbsentdays" />
     <result column="at_late" jdbcType="DOUBLE" property="atLate" />
     <association property="mEmployer" column="at_em_id"
-			javaType="cn.fjlcx.application.bean.Employer"
-			select="cn.fjlcx.application.mapper.EmployerMapper.selectEmployerById">
+			javaType="cn.smxy.application.bean.Employer"
+			select="cn.smxy.application.mapper.EmployerMapper.selectEmployerById">
 		</association>
   </resultMap>
   

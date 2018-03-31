@@ -59,8 +59,8 @@ function loadForSelect(combobox,url,valueField,textField,autoSelect){
 		textField:textField,
 		editable:false,
 		loadFilter: function(data){
+			console.log("loadForSelect:"+data);
 			if (data.code == 200){
-				console.log("loadForSelect:"+data);
 				return data.data;
 			}else{
 				HandleException(data);

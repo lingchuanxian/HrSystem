@@ -57,7 +57,7 @@
 				<tr>
 					<td class="td_key">月份：</td>
 					<td class="td_val"><input class="easyui-datebox datetime1"
-							editable="false" style="width: 204px;"
+							editable="false" style="width: 204px;" id="edit-apMonth"
 							 name="apMonth"></td>
 				</tr>
 				<tr>
@@ -82,6 +82,44 @@
 					<td class="td_key">描述：</td>
 					<td class="td_val"><input class="easyui-textbox"
 						data-options="multiline:true" type="text" name="apDescription"
+						style="width: 200px; height: 100px" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<!-- 编辑表单 -->
+	<div class="box" id="edit-box" style="display: none;">
+		<form id="edit-form" method="post">
+			<table class="rb-org" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="td_key">月份：</td>
+					<td class="td_val">
+					<input type="hidden" name="apId" id="edit-apId"/>
+					<span class="edit-apMonth"></span></td>
+				</tr>
+				<tr>
+					<td class="td_key">奖惩员工：</td>
+					<td class="td_val"><input class="easyui-combobox"
+						editable="false" id="edit-em-combox" style="width: 200px;"
+						name="apEmId" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">奖惩项目：</td>
+					<td class="td_val"><input class="easyui-combobox"
+						editable="false" id="edit-ap-type-combox" style="width: 200px;"
+						name="apProject" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">奖惩金额：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="alAllowance" data-options="required:true" id="edit-alAllowance"
+						missingMessage="请填写奖惩金额" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">描述：</td>
+					<td class="td_val"><input class="easyui-textbox"
+						data-options="multiline:true" type="text" name="apDescription" id="edit-apDescription"
 						style="width: 200px; height: 100px" /></td>
 				</tr>
 			</table>

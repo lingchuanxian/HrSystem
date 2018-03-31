@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.fjlcx.application.mapper.RewardPunishmentMapper">
-	<resultMap id="BaseResultMap" type="cn.fjlcx.application.bean.RewardPunishment">
+<mapper namespace="cn.smxy.application.mapper.RewardPunishmentMapper">
+	<resultMap id="BaseResultMap" type="cn.smxy.application.bean.RewardPunishment">
 		<!-- WARNING - @mbg.generated -->
 		<id column="ap_id" jdbcType="INTEGER" property="apId" />
 		<result column="ap_month" jdbcType="INTEGER" property="apMonth" />
@@ -9,12 +9,12 @@
 		<result column="al_date" jdbcType="DATE" property="alDate" />
 		<result column="ap_description" jdbcType="VARCHAR" property="apDescription" />
 		<association property="mEmployer" column="ap_em_id"
-			javaType="cn.fjlcx.application.bean.Employer"
-			select="cn.fjlcx.application.mapper.EmployerMapper.selectEmployerById">
+			javaType="cn.smxy.application.bean.Employer"
+			select="cn.smxy.application.mapper.EmployerMapper.selectEmployerById">
 		</association>
 		<association property="mProject" column="ap_project"
-			javaType="cn.fjlcx.application.bean.Dictionary"
-			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+			javaType="cn.smxy.application.bean.Dictionary"
+			select="cn.smxy.application.mapper.DictionaryMapper.selectDictionaryById">
 		</association>
 	</resultMap>
 

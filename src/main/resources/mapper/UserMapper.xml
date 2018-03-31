@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.fjlcx.application.mapper.UserMapper">
-	<resultMap id="BaseResultMap" type="cn.fjlcx.application.bean.User">
+<mapper namespace="cn.smxy.application.mapper.UserMapper">
+	<resultMap id="BaseResultMap" type="cn.smxy.application.bean.User">
 		<id column="us_id" jdbcType="INTEGER" property="usId" />
 		<result column="us_loginname" jdbcType="VARCHAR" property="usLoginname" />
 		<result column="us_head" jdbcType="VARCHAR" property="usHead" />
@@ -17,10 +17,10 @@
 		<result column="us_lastlogindate" jdbcType="TIMESTAMP"
 			property="usLastlogindate" />
 		<association property="organization" column="us_orgid"
-			javaType="cn.fjlcx.application.bean.Organization" select="cn.fjlcx.application.mapper.OrganizationMapper.selectOrganizationById">
+			javaType="cn.smxy.application.bean.Organization" select="cn.smxy.application.mapper.OrganizationMapper.selectOrganizationById">
 		</association>
 		<association property="department" column="us_depid"
-			javaType="cn.fjlcx.application.bean.Department" select="cn.fjlcx.application.mapper.DepartmentMapper.selectDepById">
+			javaType="cn.smxy.application.bean.Department" select="cn.smxy.application.mapper.DepartmentMapper.selectDepById">
 		</association>
 	</resultMap>
 	

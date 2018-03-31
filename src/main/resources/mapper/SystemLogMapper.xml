@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.fjlcx.application.mapper.SystemLogMapper">
-  <resultMap id="BaseResultMap" type="cn.fjlcx.application.bean.SystemLog">
+<mapper namespace="cn.smxy.application.mapper.SystemLogMapper">
+  <resultMap id="BaseResultMap" type="cn.smxy.application.bean.SystemLog">
     <!--
       WARNING - @mbg.generated
     -->
@@ -15,7 +15,7 @@
     <result column="lg_description" jdbcType="LONGVARCHAR" property="lgDescription" />
     <result column="lg_exception_detail" jdbcType="LONGVARCHAR" property="lgExceptionDetail" />
     <association property="user" column="lg_create_user"
-			javaType="cn.fjlcx.application.bean.User" select="cn.fjlcx.application.mapper.UserMapper.selectUserById">
+			javaType="cn.smxy.application.bean.User" select="cn.smxy.application.mapper.UserMapper.selectUserById">
 		</association>
   </resultMap>
   

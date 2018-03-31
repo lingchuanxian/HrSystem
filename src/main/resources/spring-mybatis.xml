@@ -13,9 +13,9 @@
                         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- 自动扫描 ,忽略@Controller注解的类 -->
-	<context:component-scan base-package="cn.fjlcx.application" />
+	<context:component-scan base-package="cn.smxy.application" />
 
-	<bean id="springBeanFactoryUtils" class="cn.fjlcx.application.utils.SpringBeanFactoryUtils" />
+	<bean id="springBeanFactoryUtils" class="cn.smxy.application.utils.SpringBeanFactoryUtils" />
 
 	<bean id="schedulerFactoryBean"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
@@ -65,7 +65,7 @@
 
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="cn.fjlcx.application.mapper" />
+		<property name="basePackage" value="cn.smxy.application.mapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 

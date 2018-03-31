@@ -5,7 +5,7 @@
 <head>
 <base href="${pageContext.request.contextPath }/">
 <meta charset="UTF-8" />
-<title>数字办公系统</title>
+<title>人事管理系统</title>
 <jsp:include page="include_header.jsp"></jsp:include>
 </head>
 <body class="easyui-layout" data-options="fit:true,scroll:'no'">

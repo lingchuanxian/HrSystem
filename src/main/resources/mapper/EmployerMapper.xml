@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.fjlcx.application.mapper.EmployerMapper">
-	<resultMap id="BaseResultMap" type="cn.fjlcx.application.bean.Employer">
+<mapper namespace="cn.smxy.application.mapper.EmployerMapper">
+	<resultMap id="BaseResultMap" type="cn.smxy.application.bean.Employer">
 		<!-- WARNING - @mbg.generated -->
 		<id column="em_id" jdbcType="INTEGER" property="emId" />
 		<result column="em_name" jdbcType="VARCHAR" property="emName" />
@@ -24,36 +24,36 @@
 		<result column="em_photo" jdbcType="LONGVARCHAR" property="emPhoto" />
 		
 		<association property="mGender" column="em_gender"
-			javaType="cn.fjlcx.application.bean.Dictionary"
-			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+			javaType="cn.smxy.application.bean.Dictionary"
+			select="cn.smxy.application.mapper.DictionaryMapper.selectDictionaryById">
 		</association>
 		<association property="mDepartment" column="em_department"
-			javaType="cn.fjlcx.application.bean.Department"
-			select="cn.fjlcx.application.mapper.DepartmentMapper.selectDepartmentById">
+			javaType="cn.smxy.application.bean.Department"
+			select="cn.smxy.application.mapper.DepartmentMapper.selectDepartmentById">
 		</association>
 		<association property="mNation" column="em_nation"
-			javaType="cn.fjlcx.application.bean.Dictionary"
-			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+			javaType="cn.smxy.application.bean.Dictionary"
+			select="cn.smxy.application.mapper.DictionaryMapper.selectDictionaryById">
 		</association>
 		<association property="mMarriage" column="em_marriage"
-			javaType="cn.fjlcx.application.bean.Dictionary"
-			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+			javaType="cn.smxy.application.bean.Dictionary"
+			select="cn.smxy.application.mapper.DictionaryMapper.selectDictionaryById">
 		</association>
 		<association property="mVisage" column="em_visage"
-			javaType="cn.fjlcx.application.bean.Dictionary"
-			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+			javaType="cn.smxy.application.bean.Dictionary"
+			select="cn.smxy.application.mapper.DictionaryMapper.selectDictionaryById">
 		</association>
 		<association property="mCulture" column="em_culture"
-			javaType="cn.fjlcx.application.bean.Dictionary"
-			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+			javaType="cn.smxy.application.bean.Dictionary"
+			select="cn.smxy.application.mapper.DictionaryMapper.selectDictionaryById">
 		</association>
 		<association property="mStatus" column="em_status"
-			javaType="cn.fjlcx.application.bean.Dictionary"
-			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+			javaType="cn.smxy.application.bean.Dictionary"
+			select="cn.smxy.application.mapper.DictionaryMapper.selectDictionaryById">
 		</association>
 		<association property="mPosition" column="em_position"
-			javaType="cn.fjlcx.application.bean.Dictionary"
-			select="cn.fjlcx.application.mapper.DictionaryMapper.selectDictionaryById">
+			javaType="cn.smxy.application.bean.Dictionary"
+			select="cn.smxy.application.mapper.DictionaryMapper.selectDictionaryById">
 		</association>
 	</resultMap>
 

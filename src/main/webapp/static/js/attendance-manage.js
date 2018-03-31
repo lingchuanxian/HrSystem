@@ -163,26 +163,31 @@ $(function(){
 	function articleEdit(){
 		var selectRows =datagrid.treegrid("getSelections");
 		if (selectRows.length < 1) {
-			$.messager.alert("提示消息", "请选择要编辑的字典!");
+			$.messager.alert("提示消息", "请选择要编辑的考勤信息!");
 			return;
 		}else if(selectRows.length > 1){
 			$.messager.alert("提示消息", "只能选择一条的记录!");
 			return;
 		}else{
 			$.ajax({
-				url: getRootPath() + "admin/dictionary/select/"+selectRows[0].dictId,
+				url: getRootPath() + "admin/attendance/select/"+selectRows[0].atId,
 				type: "post",
 				dataType: "json",
 				success: function (data) {
+					loadForSelect($('#edit-employer-combox'),"admin/employer/selectAll","emId","emName",false);
 					if(data.code == 200){
 						var dict = data.data;
 						console.log(dict);
-						loadType($('#edit-type-combox'),2);
-						$("#edit-dictId").val(dict.dictId);
-						$("#edit-dictCode").textbox('setValue',dict.dictCode);
-						$("#edit-dictName").textbox("setValue", dict.dictName);
-						$("#edit-type-combox").combobox("select", dict.dictTypeId);
-						$("#edit-dictDescription").textbox("setValue", dict.dictDescription);
+						$("#edit-atId").val(dict.atId);
+						$("#edit-atMonth").html(dict.atMonth);
+						$("#edit-atWorkdays").textbox('setValue',dict.atWorkdays);
+						$("#edit-atLeavedays").textbox("setValue", dict.atLeavedays);
+						$("#edit-atOvertime").textbox('setValue',dict.atOvertime);
+						$("#edit-atAbsentdays").textbox("setValue", dict.atAbsentdays);
+						$("#edit-atLate").textbox('setValue',dict.atLate);
+						
+						$("#edit-employer-combox").combobox("select", dict.atEmId);
+						
 						$("#edit-form").form("disableValidation");
 						$('#edit-box').dialog("open");
 					}else{
@@ -195,7 +200,7 @@ $(function(){
 	}
 
 	$('#edit-box').dialog({
-		title: '字典编辑',
+		title: '考勤记录编辑',
 		width: 400,
 		height: 400,
 		closed: true,
@@ -218,7 +223,7 @@ $(function(){
 
 	function formEditSubmit(){
 		$('#edit-form').form('submit', {
-			url:getRootPath() + 'admin/dictionary/update',
+			url:getRootPath() + 'admin/attendance/update',
 			onSubmit: function(){
 				return $(this).form('enableValidation').form('validate');
 			},

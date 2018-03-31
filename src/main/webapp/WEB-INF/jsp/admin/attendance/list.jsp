@@ -100,6 +100,55 @@
 			</table>
 		</form>
 	</div>
+	
+	<!-- 编辑表单 -->
+	<div class="box" id="edit-box" style="display: none;">
+		<form id="edit-form" method="post">
+			<table class="rb-org" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="td_key">月份：</td>
+					<td class="td_val"><input type="hidden" id="edit-atId" name="atId"/><span id="edit-atMonth"></span></td>
+				</tr>
+				<tr>
+					<td class="td_key">员工：</td>
+					<td class="td_val"><input class="easyui-combobox"
+						editable="false" id="edit-employer-combox" style="width: 200px;"
+						name="atEmId" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">出勤天数：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="atWorkdays" data-options="required:true" id="edit-atWorkdays"
+						missingMessage="请填写出勤天数" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">请假天数：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="atLeavedays" data-options="required:true" id="edit-atLeavedays"
+						missingMessage="请填写请假天数" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">加班天数：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="atOvertime" data-options="required:true" id="edit-atOvertime"
+						missingMessage="请填写加班天数" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">缺席天数：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="atAbsentdays" data-options="required:true" id="edit-atAbsentdays"
+						missingMessage="请填写缺席天数" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">迟到天数：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="atLate" data-options="required:true" id="edit-atLate"
+						missingMessage="请填写迟到天数" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
 	<script type="text/javascript" src="static/easyui/easy-date-yearmonth.js"></script>
 	<script type="text/javascript" src="static/js/attendance-manage.js"></script>
 </body>

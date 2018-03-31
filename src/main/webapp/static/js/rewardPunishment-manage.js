@@ -168,26 +168,30 @@ $(function(){
 	function articleEdit(){
 		var selectRows =datagrid.treegrid("getSelections");
 		if (selectRows.length < 1) {
-			$.messager.alert("提示消息", "请选择要编辑的字典!");
+			$.messager.alert("提示消息", "请选择要编辑的奖惩记录!");
 			return;
 		}else if(selectRows.length > 1){
 			$.messager.alert("提示消息", "只能选择一条的记录!");
 			return;
 		}else{
 			$.ajax({
-				url: getRootPath() + "admin/dictionary/select/"+selectRows[0].dictId,
+				url: getRootPath() + "admin/rewardPunishment/select/"+selectRows[0].apId,
 				type: "post",
 				dataType: "json",
 				success: function (data) {
+					loadForSelect($('#edit-em-combox'),"admin/employer/selectAll","emId","emName",false);
+					loadForSelect($('#edit-ap-type-combox'),"admin/selectTypes/Reward&Punishment","dictId","dictName",false);
+					console.log(data);
 					if(data.code == 200){
 						var dict = data.data;
-						console.log(dict);
-						loadType($('#edit-type-combox'),2);
-						$("#edit-dictId").val(dict.dictId);
-						$("#edit-dictCode").textbox('setValue',dict.dictCode);
-						$("#edit-dictName").textbox("setValue", dict.dictName);
-						$("#edit-type-combox").combobox("select", dict.dictTypeId);
-						$("#edit-dictDescription").textbox("setValue", dict.dictDescription);
+						$("#edit-apId").val(dict.apId);
+						$(".edit-apMonth").html(dict.apMonth);
+						
+						$("#edit-em-combox").combobox("select", dict.apEmId);
+						$("#edit-ap-type-combox").combobox("select", dict.apProject);
+						
+						$("#edit-alAllowance").textbox("setValue", dict.alAllowance);
+						$("#edit-apDescription").textbox("setValue", dict.alDescription);
 						$("#edit-form").form("disableValidation");
 						$('#edit-box').dialog("open");
 					}else{
@@ -200,7 +204,7 @@ $(function(){
 	}
 
 	$('#edit-box').dialog({
-		title: '字典编辑',
+		title: '奖惩信息编辑',
 		width: 400,
 		height: 400,
 		closed: true,
@@ -223,7 +227,7 @@ $(function(){
 
 	function formEditSubmit(){
 		$('#edit-form').form('submit', {
-			url:getRootPath() + 'admin/dictionary/update',
+			url:getRootPath() + 'admin/rewardPunishment/update',
 			onSubmit: function(){
 				return $(this).form('enableValidation').form('validate');
 			},

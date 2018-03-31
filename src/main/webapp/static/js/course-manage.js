@@ -186,26 +186,35 @@ $(function(){
 	function articleEdit(){
 		var selectRows =datagrid.treegrid("getSelections");
 		if (selectRows.length < 1) {
-			$.messager.alert("提示消息", "请选择要编辑的字典!");
+			$.messager.alert("提示消息", "请选择要编辑的培训课程信息!");
 			return;
 		}else if(selectRows.length > 1){
 			$.messager.alert("提示消息", "只能选择一条的记录!");
 			return;
 		}else{
+			loadForSelect($('#edit-train-type-combox'),"admin/selectType/TrainingMode","dictId","dictName",false);
+			loadForSelect($('#edit-teach-type-combox'),"admin/selectType/TeachingMode","dictId","dictName",false);
 			$.ajax({
-				url: getRootPath() + "admin/dictionary/select/"+selectRows[0].dictId,
+				url: getRootPath() + "admin/course/select/"+selectRows[0].couId,
 				type: "post",
 				dataType: "json",
 				success: function (data) {
 					if(data.code == 200){
 						var dict = data.data;
 						console.log(dict);
-						loadType($('#edit-type-combox'),2);
-						$("#edit-dictId").val(dict.dictId);
-						$("#edit-dictCode").textbox('setValue',dict.dictCode);
-						$("#edit-dictName").textbox("setValue", dict.dictName);
-						$("#edit-type-combox").combobox("select", dict.dictTypeId);
-						$("#edit-dictDescription").textbox("setValue", dict.dictDescription);
+						$("#edit-couId").val(dict.couId);
+						$("#edit-couName").textbox('setValue',dict.couName);
+						$("#edit-couSponsor").textbox("setValue", dict.couSponsor);
+						$("#edit-couLearner").textbox('setValue',dict.couLearner);
+						$("#edit-couTeachinghours").textbox("setValue", dict.couTeachinghours);
+						$("#edit-couFee").textbox('setValue',dict.couFee);
+						
+						$("#edit-train-type-combox").combobox("select", dict.couTrainingmethods);
+						$("#edit-teach-type-combox").combobox("select", dict.couTeachingmethods);
+						
+						$('#edit-couStarttime').datebox('setValue',jsonYearMonthDay(dict.couStarttime));
+						$('#edit-couEndtime').datebox('setValue',jsonYearMonthDay(dict.couEndtime));
+						
 						$("#edit-form").form("disableValidation");
 						$('#edit-box').dialog("open");
 					}else{
@@ -218,7 +227,7 @@ $(function(){
 	}
 
 	$('#edit-box').dialog({
-		title: '字典编辑',
+		title: '培训课程编辑',
 		width: 400,
 		height: 400,
 		closed: true,
@@ -241,7 +250,7 @@ $(function(){
 
 	function formEditSubmit(){
 		$('#edit-form').form('submit', {
-			url:getRootPath() + 'admin/dictionary/update',
+			url:getRootPath() + 'admin/course/update',
 			onSubmit: function(){
 				return $(this).form('enableValidation').form('validate');
 			},

@@ -102,6 +102,61 @@
 		</form>
 	</div>
 
+	<!-- 编辑表单 -->
+	<div class="box" id="edit-box" style="display: none;">
+		<form id="edit-form" method="post">
+			<table class="rb-org" border="0" cellspacing="0" cellpadding="0">
+			
+				<tr>
+					<td class="td_key">员工姓名：</td>
+					<td class="td_val">
+					<input type="hidden" id="edit-conId" name="conId"/>
+					<input class="easyui-combobox"
+						editable="false" id="edit-employer-combox" style="width: 200px;"
+						name="conEmId" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">合同类型：</td>
+					<td class="td_val"><input class="easyui-combobox"
+						editable="false" id="edit-contract-combox" style="width: 200px;"
+						name="conType" /></td>
+				</tr>
+						<tr>
+					<td class="td_key">开始时间：</td>
+					<td class="td_val"><input class="easyui-datebox"
+							editable="false" style="width: 204px;" id="edit-conStarttime"
+							 name="conStarttime"></td>
+				</tr>
+				<tr>
+					<td class="td_key">结束时间：</td>
+					<td class="td_val"><input class="easyui-datebox"
+							editable="false" style="width: 204px;" id="edit-conEndtime"
+							 name="conEndtime"></td>
+				</tr>
+				<tr>
+					<td class="td_key">合同期限：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="conPeriod" data-options="required:true" id="edit-conPeriod"
+						missingMessage="请填写合同期限" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">合同期工资：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="conWage" data-options="required:true" id="edit-conWage"
+						missingMessage="请填写合同期工资" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">备注：</td>
+					<td class="td_val"><input class="easyui-textbox"
+						data-options="multiline:true" type="text" name="conRemark"
+						id="edit-conRemark"
+						style="width: 200px; height: 100px" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+
 	<script type="text/javascript" src="static/js/contract-manage.js"></script>
 </body>
 </html>

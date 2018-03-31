@@ -5,13 +5,13 @@
 <head>
 <base href="${pageContext.request.contextPath }/">
 <meta charset="UTF-8" />
-<title>登录-后台管理系统</title>
+<title>登录-人事管理系统</title>
 <link href="static/login/css/login.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
 	<div class="login">
-		<div class="message">办公系统-管理登录</div>
+		<div class="message">人事管理系统-管理登录</div>
 		<div id="darkbannerwrap"></div>
 		<form method="post">
 			<input name="username" placeholder="用户名" required="required" type="text" id="name">
@@ -27,7 +27,7 @@
 	</div>
 
 	<div class="copyright">
-		© 2018 All Right Reserve <a href="http://www.lingcx.cn/" target="_blank">ling_cx</a>
+		© 2018 All Right Reserve <a href="#" target="_blank">smxy</a>
 	</div>
 	<script type="text/javascript" src="static/js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="static/layer/layer.js"></script>

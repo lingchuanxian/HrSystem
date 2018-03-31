@@ -112,6 +112,71 @@
 			</table>
 		</form>
 	</div>
+	
+	<!-- 编辑表单 -->
+	<div class="box" id="edit-box" style="display: none;">
+		<form id="edit-form" method="post">
+			<table class="rb-org" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="td_key">课程名称：</td>
+					<td class="td_val">
+					<input type="hidden" name="couId" id="edit-couId"/>
+					<input class="easyui-textbox" type="text"
+						name="couName" data-options="required:true" id="edit-couName"
+						missingMessage="请填写课程名称" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">主办单位：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="couSponsor" data-options="required:true" id="edit-couSponsor"
+						missingMessage="请填写主办单位" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">培训方式：</td>
+					<td class="td_val"><input class="easyui-combobox"
+						editable="false" id="edit-train-type-combox" style="width: 200px;"
+						name="couTrainingmethods" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">授课对象：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="couLearner" data-options="required:true" id="edit-couLearner"
+						missingMessage="请填写授课对象" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">授课方式：</td>
+					<td class="td_val"><input class="easyui-combobox"
+						editable="false" id="edit-teach-type-combox" style="width: 200px;"
+						name="couTeachingmethods" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">课时数：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="couTeachinghours" data-options="required:true" id="edit-couTeachinghours"
+						missingMessage="请填写课时数" /></td>
+				</tr>
+				<tr>
+					<td class="td_key">课时费用：</td>
+					<td class="td_val"><input class="easyui-textbox" type="text"
+						name="couFee" data-options="required:true" id="edit-couFee"
+						missingMessage="请填写课时费用" /></td>
+				</tr>
+								<tr>
+					<td class="td_key">开课时间：</td>
+					<td class="td_val"><input class="easyui-datebox"
+							editable="false" style="width: 204px;" id="edit-couStarttime"
+							 name="couStarttime"></td>
+				</tr>
+				<tr>
+					<td class="td_key">结课时间：</td>
+					<td class="td_val"><input class="easyui-datebox"
+							editable="false" style="width: 204px;" id="edit-couEndtime"
+							 name="couEndtime"></td>
+				</tr>
+
+			</table>
+		</form>
+	</div>
 
 	<script type="text/javascript" src="static/js/course-manage.js"></script>
 </body>
